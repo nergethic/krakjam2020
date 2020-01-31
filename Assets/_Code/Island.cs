@@ -2,32 +2,26 @@
 
 public class Island : MonoBehaviour
 {
-    [SerializeField] Direction direction;
-    [SerializeField] float floatingSpeed;
-    // Start is called before the first frame update
+    [SerializeField]  Transform islandMergePoint;
+    [SerializeField] Transform destination;
+    [SerializeField] float timeToMergeInSeconds;
+
+    private Vector3 diff;
+
     void Start()
     {
-        
+        diff = destination.position - islandMergePoint.position;
     }
 
     // Update is called once per frame
     void Update() {
         var pos = transform.position;
 
-        switch (direction) {
-            case Direction.Left:
-                pos.x += Time.deltaTime * floatingSpeed;
-                break;
-            
-            case Direction.Right:
-                break;
+        var currentDiff = destination.position - islandMergePoint.position;
+        if (currentDiff.magnitude > 0.01f) {
+            pos += diff * Time.deltaTime / timeToMergeInSeconds;
         }
 
         transform.position = pos;
-    }
-
-    enum Direction {
-        Left,
-        Right
     }
 }
