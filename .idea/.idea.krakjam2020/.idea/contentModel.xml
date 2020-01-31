@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Nergetic\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Nergetic\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_krakjam2020.-322042872.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Nergetic\Documents\krakjam2020" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="_Code" t="Include">
+          <e p="Island.cs" t="Include" />
+        </e>
+        <e p="_Shaders" t="Include">
+          <e p="shader1.shader" t="Include" />
+        </e>
+        <e p="_Textures" t="Include">
+          <e p="xdtest.cs" t="Include" />
+        </e>
+      </e>
+      <e p="krakjam2020.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
