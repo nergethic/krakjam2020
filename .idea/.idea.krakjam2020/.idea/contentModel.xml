@@ -9,6 +9,7 @@
         <e p="_Code" t="Include">
           <e p="DynamicCamera.cs" t="Include" />
           <e p="Island.cs" t="Include" />
+          <e p="PlayerController.cs" t="Include" />
         </e>
         <e p="_Shaders" t="Include">
           <e p="shader1.shader" t="Include" />
