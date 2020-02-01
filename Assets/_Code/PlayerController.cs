@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     const float AIM_WEIGHT_CHANGE_SPEED = 1f;
     const string JUMP_BLEND_NAME = "Jump";
     const string JUMP_FORWARD_BOOL_NAME = "JumpForward";
+    const string GROUND_HIT_TRIGGER_NAME = "HitGround";
     const float JUMP_COOLDOWN = 1.5f;
     new Transform transform;
     float timeOfLastJump = -2f;
@@ -48,6 +49,10 @@ public class PlayerController : MonoBehaviour {
             else if (Input.GetKey (KeyCode.D))
                 transform.Rotate(0, rotationSpeed, 0);
         }
+    }
+
+    public void HandleGroundHit() {
+        animator.SetTrigger (GROUND_HIT_TRIGGER_NAME);
     }
     [ContextMenu("Equip")]
     public void AnimateEquippingGun() {

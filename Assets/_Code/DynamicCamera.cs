@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class DynamicCamera : MonoBehaviour {
-    [SerializeField] float startPointLookDuration;
+    public float startPointLookDuration;
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float backOffset;
@@ -13,16 +13,28 @@ public class DynamicCamera : MonoBehaviour {
     [SerializeField] Transform startPoint;
     [SerializeField] Transform startLookAtTarget;
     [SerializeField] Transform player;
+    [SerializeField] PlayerController playerController;
     [SerializeField] Transform playerHead;
+    [SerializeField] GroundImpacter groudImpacter;
     new Transform transform;
     bool playerReached;
+    bool groundHit;
 
     void Awake() {
         transform = gameObject.transform;
+        groudImpacter.OnGroundHit += HandleGroundHit;
     }
+
+    void HandleGroundHit() {
+        groundHit = true;
+    }
+
     IEnumerator Start() {
         transform.position = startPoint.position;
         transform.LookAt (startLookAtTarget);
+        while (!groundHit)
+            yield return null;
+        playerController.HandleGroundHit();
         yield return new WaitForSeconds (startPointLookDuration);
         var progress = 0f;
         while (progress < 1) {

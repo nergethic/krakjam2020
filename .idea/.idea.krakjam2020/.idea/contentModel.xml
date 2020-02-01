@@ -14,9 +14,10 @@
           <e p="CameraShaker.cs" t="Include" />
           <e p="CatapultShoot.cs" t="Include" />
           <e p="DynamicCamera.cs" t="Include" />
-          <e p="GameStartSceneManager.cs" t="Include" />
           <e p="GrassSpawner.cs" t="Include" />
+          <e p="GroundImpacter.cs" t="Include" />
           <e p="Island.cs" t="Include" />
+          <e p="PickUpWeapon.cs" t="Include" />
           <e p="PlayerArmour.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="PoissonSampler.cs" t="Include" />
@@ -29,6 +30,7 @@
           <e p="Utilities" t="Include">
             <e p="CameraUtilities.cs" t="Include" />
           </e>
+          <e p="Weapon.cs" t="Include" />
           <e p="WeaponShooting.cs" t="Include" />
         </e>
         <e p="BOXOPHOBIC" t="Include">
