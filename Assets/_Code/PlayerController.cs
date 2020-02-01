@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Rigidbody rb;
     const string MOVEMENT_BLEND = "Speed";
     const string DEATH_TRIGGER_NAME = "Death";
-    const float AIM_WEIGHT_CHANGE_SPEED = 1f;
+    const float AIM_WEIGHT_CHANGE_SPEED = 5f;
     const string JUMP_BLEND_NAME = "Jump";
     const string JUMP_FORWARD_BOOL_NAME = "JumpForward";
     const string GROUND_HIT_TRIGGER_NAME = "HitGround";
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     float timeOfLastJump = -2f;
     bool equippingGun;
     bool inputBlocked;
+    bool dead;
 
     void Awake() {
         transform = gameObject.transform;
@@ -58,7 +59,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     Coroutine inputRestoreCor;
+
+    [ContextMenu ("Hit")]
+    void xd() {
+        PlayHitAnimation (transform);
+    }
     public void PlayHitAnimation(Transform otherPlayer) {
+        if (dead)
+            return;
         inputBlocked = true;
         animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
         var dir = transform.position - otherPlayer.position;
@@ -87,7 +95,17 @@ public class PlayerController : MonoBehaviour {
 
     [ContextMenu("Die")]
     public void PlayDeathAnimation() {
+        animator.SetLayerWeight (1, 0);
+        inputBlocked = true;
+        dead = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotationY;
+        animator.applyRootMotion = true;
         animator.SetTrigger (DEATH_TRIGGER_NAME);
+        Invoke (nameof(DisableRootMotion), 2f);
+    }
+
+    void DisableRootMotion() {
+        animator.applyRootMotion = false;
     }
 
     Coroutine weightCor;
@@ -96,7 +114,7 @@ public class PlayerController : MonoBehaviour {
         var weight = animator.GetLayerWeight (1);
         var startWeight = weight;
         while (weight != targetWeight) {
-            weight = Mathf.Lerp (weight, targetWeight, progress);
+            weight = Mathf.Lerp (startWeight, targetWeight, progress);
             animator.SetLayerWeight (1, weight);
             progress += Time.deltaTime * AIM_WEIGHT_CHANGE_SPEED;
             yield return null;
