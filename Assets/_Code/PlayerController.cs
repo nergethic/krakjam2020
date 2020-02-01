@@ -49,21 +49,21 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         if (inputBlocked)
             return;
-        
+
         bool shiftDown;
         bool forwardKeyPressed;
         bool backwardKeyPressed;
         bool leftKeyPressed;
         bool rightKeyPressed;
         bool jumpPressed;
-        
-        if(pad == null) {
-            shiftDown = Input.GetKey(KeyCode.LeftShift);
-            forwardKeyPressed = Input.GetKey(KeyCode.W);
-            backwardKeyPressed = Input.GetKey(KeyCode.S);
-            leftKeyPressed = Input.GetKey(KeyCode.A);
-            rightKeyPressed = Input.GetKey(KeyCode.D);
-            jumpPressed = Input.GetKeyDown(KeyCode.Space);
+
+        if (pad == null) {
+            shiftDown = Input.GetKey (KeyCode.LeftShift);
+            forwardKeyPressed = Input.GetKey (KeyCode.W);
+            backwardKeyPressed = Input.GetKey (KeyCode.S);
+            leftKeyPressed = Input.GetKey (KeyCode.A);
+            rightKeyPressed = Input.GetKey (KeyCode.D);
+            jumpPressed = Input.GetKeyDown (KeyCode.Space);
         }
         else {
             shiftDown = pad.rightTrigger.isPressed;
@@ -73,17 +73,17 @@ public class PlayerController : MonoBehaviour {
             backwardKeyPressed = leftStick.y < -MIN_STICK_TILT;
             rightKeyPressed = leftStick.x > MIN_STICK_TILT;
             leftKeyPressed = leftStick.x < -MIN_STICK_TILT;
-            
+
             jumpPressed = pad.aButton.isPressed;
         }
-        
+
         if (forwardKeyPressed) {
-            animator.SetFloat(MOVEMENT_BLEND, shiftDown ? 2 : 1);
+            animator.SetFloat (MOVEMENT_BLEND, shiftDown ? 2 : 1);
             transform.position += transform.forward * (shiftDown ? runSpeed : walkSpeed);
         }
-        else if(backwardKeyPressed){
-            animator.SetFloat(MOVEMENT_BLEND, -1);
-            transform.position -= transform.forward * walkSpeed/2f;
+        else if (backwardKeyPressed) {
+            animator.SetFloat (MOVEMENT_BLEND, -1);
+            transform.position -= transform.forward * walkSpeed / 2f;
         }
         else {
             animator.SetFloat (MOVEMENT_BLEND, 0);
@@ -95,11 +95,13 @@ public class PlayerController : MonoBehaviour {
             timeOfLastJump = Time.time;
         }
 
-        if (forwardKeyPressed || backwardKeyPressed || equippingGun) {
-            if (leftKeyPressed)
-                transform.Rotate(0, -rotationSpeed, 0);
-            else if (rightKeyPressed)
-                transform.Rotate(0, rotationSpeed, 0);
+        if (leftKeyPressed) {
+            animator.SetFloat (MOVEMENT_BLEND, 1);
+            transform.Rotate (0, -rotationSpeed, 0);
+        }
+        else if (rightKeyPressed) {
+            transform.Rotate (0, rotationSpeed, 0);
+            animator.SetFloat (MOVEMENT_BLEND, 1);
         }
     }
 
@@ -114,9 +116,9 @@ public class PlayerController : MonoBehaviour {
             return;
         inputBlocked = true;
         animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
-        var dir = transform.position - otherPlayer.position;
-        var lookRotation = Quaternion.LookRotation (dir);
-        transform.rotation = lookRotation;
+//        var dir = transform.position - otherPlayer.position;
+//        var lookRotation = Quaternion.LookRotation (dir);
+//        transform.rotation = lookRotation;
         if(inputRestoreCor != null)
             StopCoroutine (inputRestoreCor);
         inputRestoreCor = StartCoroutine (RestoreInput());

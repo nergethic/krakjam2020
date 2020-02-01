@@ -576,6 +576,11 @@ PrefabInstance:
       objectReference: {fileID: 1545445395}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 759020662}
+    - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
+        type: 3}
       propertyPath: playerHead
       value: 
       objectReference: {fileID: 1545445396}
@@ -584,11 +589,6 @@ PrefabInstance:
       propertyPath: groudImpacter
       value: 
       objectReference: {fileID: 419489613}
-    - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
-        type: 3}
-      propertyPath: playerController
-      value: 
-      objectReference: {fileID: 759020662}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84aafd49554096b4cb414d096379c068, type: 3}
 --- !u!1 &1284998370
