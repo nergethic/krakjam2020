@@ -4,9 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace _Code.Robot_Parts {
-    public class RobotBody : MonoBehaviour
-    {
-       public bool player1;
+    public class RobotBody : MonoBehaviour {
         [SerializeField] BodyPart[] bodyParts;
         List<BodyPart.BodyType> centerBodyTypes = new List<BodyPart.BodyType> {BodyPart.BodyType.Chest, BodyPart.BodyType.Helm, BodyPart.BodyType.Leg};
 

@@ -31,13 +31,16 @@ public class PlayerArmour : MonoBehaviour
 
     public void RemoveRandomBodyPart()
     {
-        var randomParts = armorParts.OrderBy(x=>rnd.Next()).ToList();
-        for (int i = 0; i < randomParts.Count; i++)
+
+        ArmourPart[] randomIndices = armorParts.OrderBy(x=>rnd.Next()).ToArray();
+
+        for (var i = 0; i < randomIndices.Length; i++)
         {
-            var randomPart = randomParts[i];
-            if (randomPart.isAttached && randomPart.player1 == robotBody.player1)
-            {
-                StartCoroutine(EnablePhysicsAfterSomeTime(randomPart));
+            
+            var part = armorParts[i];
+           
+            if (part.isAttached) {
+                StartCoroutine(EnablePhysicsAfterSomeTime(part));
                 break;
             }
         }
@@ -88,9 +91,7 @@ public class PlayerArmour : MonoBehaviour
                     armourPartTransform.position = bodyPart.transform.position;
                     armourPartTransform.rotation = bodyPart.transform.rotation;
                     armourPartTransform.parent = bodyPart.gameObject.transform;
-                    var armourPart = armourPartTransform.GetComponent<ArmourPart>();
-                    armourPart.isAttached = true;
-                    armourPart.player1 = robotBody.player1;
+                    armourPartTransform.GetComponent<ArmourPart>().isAttached = true;
                     if (structList[i].coroutine != null)
                         StopCoroutine(structList[i].coroutine);
                     structList.Remove(structList[i]);
@@ -103,7 +104,7 @@ public class PlayerArmour : MonoBehaviour
         if (other.tag.Equals(armourTag)) {
             var go = other.gameObject;
             var armorPart = go.GetComponent<ArmourPart>();
-            if (armorPart == null || armorPart.isAttached)
+            if (armorPart == null)
                 return;
             var (exists, armorSocket) = robotBody.GetBodyPart(armorPart.bodyType);
 
@@ -117,7 +118,7 @@ public class PlayerArmour : MonoBehaviour
     }
 
     IEnumerator ArmourTravelToPlayer(Transform armour, BodyPart bodyPart) {
-        var triggerCol = armour.transform.GetChild(0).GetComponentInChildren<BoxCollider>();
+        var triggerCol = armour.GetComponentInChildren<BoxCollider>();
         if (triggerCol == null)
             Debug.LogError("no trigger collider on armor part!");
 

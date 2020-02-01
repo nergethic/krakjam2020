@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Armour
-  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -23,7 +22,7 @@ TagManager:
   - 
   - 
   - PostProcess
-  - Player
+  - 
   - 
   - 
   - 

@@ -7,7 +7,6 @@ public class ArmourPart : MonoBehaviour
 {
     public BodyPart.BodyType bodyType;
     public bool isAttached;
-    public bool player1;
     void Start()
     {
         
