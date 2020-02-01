@@ -9,10 +9,14 @@ public class WeaponShooting : MonoBehaviour
  
    [SerializeField] int shootButton;
    [SerializeField] private string enemyPlayerTag;
-   [SerializeField] private PlayerArmour playerArmourScript;
-   [SerializeField] private PlayerController playerController;
+  
+   [SerializeField] private Transform camera;
+
+   private int layerMask;
+  // [SerializeField] private PlayerController playerController;
    private void Start()
    {
+        layerMask = 1 << LayerMask.NameToLayer ("Player"); // only check for collisions with layerX
     //   Transform camera=playerController...
    }
 
@@ -43,18 +47,27 @@ public class WeaponShooting : MonoBehaviour
 
     void CastRaycast()
     {
+       var ray=new Ray(camera.position,camera.forward);
+       RaycastHit hit;
+     
+       if (Physics.Raycast(ray, out hit, 500,layerMask))
+       {
+           //Add shooting Shader method
+           Debug.Log(hit.collider.gameObject.name);
+           
+           if (hit.transform.gameObject.tag.Equals(enemyPlayerTag))
+           {
+               PlayerArmour playerArmour = hit.transform.gameObject.GetComponent<PlayerArmour>();
+               playerArmour.RemoveRandomBodyPart();
+           }
+       }
         
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo))
-        {
-            Debug.DrawRay(transform.position, transform.right,Color.blue);
-                
-                //Add shooting Shader method
-                if (hitInfo.transform.gameObject.tag.Equals(enemyPlayerTag))
-                {
-
-                    //Add method from PlayerArmour
-                }
+     
             
-        }
+                
+              
+              
+            
+        
     }
 }
