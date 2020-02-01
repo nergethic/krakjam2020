@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    public DynamicCamera dynamicCamera;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float jumpForce;
@@ -9,19 +10,24 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
     const string MOVEMENT_BLEND = "Speed";
+    const string DEATH_TRIGGER_NAME = "Death";
     const float AIM_WEIGHT_CHANGE_SPEED = 1f;
     const string JUMP_BLEND_NAME = "Jump";
     const string JUMP_FORWARD_BOOL_NAME = "JumpForward";
     const string GROUND_HIT_TRIGGER_NAME = "HitGround";
+    const string PLAYER_HIT_TRIGGER_NAME = "Hit";
     const float JUMP_COOLDOWN = 1.5f;
     new Transform transform;
     float timeOfLastJump = -2f;
     bool equippingGun;
+    bool inputBlocked;
 
     void Awake() {
         transform = gameObject.transform;
     }
     void Update() {
+        if (inputBlocked)
+            return;
         var shiftDown = Input.GetKey (KeyCode.LeftShift);
         var forwardKeyPressed = Input.GetKey (KeyCode.W);
         var backwardKeyPressed = Input.GetKey (KeyCode.S);
@@ -51,6 +57,23 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    Coroutine inputRestoreCor;
+    public void PlayHitAnimation(Transform otherPlayer) {
+        inputBlocked = true;
+        animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
+        var dir = transform.position - otherPlayer.position;
+        var lookRotation = Quaternion.LookRotation (dir);
+        transform.rotation = lookRotation;
+        if(inputRestoreCor != null)
+            StopCoroutine (inputRestoreCor);
+        inputRestoreCor = StartCoroutine (RestoreInput());
+    }
+
+    IEnumerator RestoreInput() {
+        yield return new WaitForSeconds (3f);
+        inputBlocked = false;
+    }
+
     public void HandleGroundHit() {
         animator.SetTrigger (GROUND_HIT_TRIGGER_NAME);
     }
@@ -60,6 +83,11 @@ public class PlayerController : MonoBehaviour {
             StopCoroutine (weightCor);
         weightCor = StartCoroutine (UpperBodyWeightChangeCor (1f));
         equippingGun = true;
+    }
+
+    [ContextMenu("Die")]
+    public void PlayDeathAnimation() {
+        animator.SetTrigger (DEATH_TRIGGER_NAME);
     }
 
     Coroutine weightCor;

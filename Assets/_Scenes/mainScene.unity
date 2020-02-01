@@ -224,7 +224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432857720
 GameObject:
@@ -254,7 +254,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &487859401 stripped
 Camera:
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830361210}
   m_Layer: 0
-  m_Name: LookAtStartPoint
+  m_Name: CameraLookAtStartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,7 +429,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891206488
 GameObject:
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 891206490}
   - component: {fileID: 891206489}
   m_Layer: 0
-  m_Name: RightCamera
+  m_Name: RightPlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,7 @@ Transform:
   m_Children:
   - {fileID: 1347800728}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1230789806
 PrefabInstance:
@@ -612,7 +612,7 @@ Transform:
   - {fileID: 5006512736488996938}
   - {fileID: 1902569717}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: -92.13, z: 0}
 --- !u!114 &1284998372
 MonoBehaviour:
@@ -643,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1317900472}
   m_Layer: 0
-  m_Name: StartPosition
+  m_Name: CameraStartPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,7 +661,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1347800727 stripped
 Camera:
@@ -832,7 +832,7 @@ PrefabInstance:
     - target: {fileID: 3382444431159161951, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: LeftPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 1777658045399795276, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
@@ -872,7 +872,7 @@ PrefabInstance:
     - target: {fileID: 1777658045399795276, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1777658045399795276, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
@@ -1014,7 +1014,7 @@ Transform:
   - {fileID: 1951186700}
   - {fileID: 5006512735397536216}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1902569716
 GameObject:
@@ -1086,7 +1086,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955918253}
   m_Layer: 0
-  m_Name: groundLevel
+  m_Name: GroundLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1104,7 +1104,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2134388334
 GameObject:
@@ -1117,7 +1117,7 @@ GameObject:
   - component: {fileID: 2134388336}
   - component: {fileID: 2134388335}
   m_Layer: 0
-  m_Name: LeftCamera
+  m_Name: LeftPlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1153,7 +1153,7 @@ Transform:
   m_Children:
   - {fileID: 487859402}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2803003315012928
 MeshRenderer:
@@ -6189,7 +6189,7 @@ PrefabInstance:
     - target: {fileID: 4137821239893584624, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: RightPlayer2
       objectReference: {fileID: 0}
     - target: {fileID: 1096388630160251107, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
@@ -6229,7 +6229,7 @@ PrefabInstance:
     - target: {fileID: 1096388630160251107, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1096388630160251107, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
