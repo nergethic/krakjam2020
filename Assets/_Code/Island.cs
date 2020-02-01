@@ -63,7 +63,8 @@ public class Island : MonoBehaviour {
             pos += diff * Time.deltaTime / timeToMergeInSeconds;
         } else {
             mergeCompleted = true;
-            shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
+            if (shaker != null)
+                shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
         }
 
         transform.position = pos;
