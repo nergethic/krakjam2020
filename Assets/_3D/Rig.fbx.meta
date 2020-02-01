@@ -18,7 +18,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Avatar creation failed:\n\tTransform 'Head 1' for human bone
+      'Head' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -287,12 +288,7 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Head
-      parentName: Rig(Clone)
-      position: {x: -0, y: 2.931778, z: 0}
-      rotation: {x: -0.50000006, y: 0.4999999, z: 0.5, w: 0.5}
-      scale: {x: 100, y: 100, z: 100}
-    - name: Other
+    - name: BodyMesh
       parentName: Rig(Clone)
       position: {x: -0, y: 2.931778, z: 0}
       rotation: {x: -0.50000006, y: 0.4999999, z: 0.5, w: 0.5}
@@ -392,13 +388,13 @@ ModelImporter:
       position: {x: 4.292815e-12, y: 0.00044440146, z: -1.6120794e-11}
       rotation: {x: 0.017265012, y: 0.7040057, z: 0.021049263, w: 0.70967233}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-    - name: Head 1
+    - name: Head
       parentName: Neck
       position: {x: -2.4508609e-11, y: 0.0006893909, z: -1.8553692e-12}
       rotation: {x: -0.0035615189, y: 0.0008417731, z: 0.013992117, w: 0.99989545}
       scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
     - name: Head_end
-      parentName: Head 1
+      parentName: Head
       position: {x: -0, y: 0.0009628927, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
