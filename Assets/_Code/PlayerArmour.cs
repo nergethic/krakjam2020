@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _Code.Robot_Parts;
 using UnityEditor;
 using UnityEngine;
 using BodyPart = _Code.Robot_Parts.BodyPart;
+using Random = System.Random;
 
 
 public class PlayerArmour : MonoBehaviour
@@ -16,6 +18,7 @@ public class PlayerArmour : MonoBehaviour
     private List<ArmourAndArmourPlaceholder> structList = new List<ArmourAndArmourPlaceholder>();
     private string armourTag = "Armour";
     private Coroutine cor;
+    private Random rnd = new Random();
     private void OnTriggerEnter(Collider other)
     {
         CheckIsTriggerEnterWithArmour(other);
@@ -26,9 +29,16 @@ public class PlayerArmour : MonoBehaviour
         CheckIsArmourCloseToArmourPlace();
     }
 
-    public void RemoveRandomBodyPart() {
-        for (var i = 0; i < armorParts.Length; i++) {
+    public void RemoveRandomBodyPart()
+    {
+
+        ArmourPart[] randomIndices = armorParts.OrderBy(x=>rnd.Next()).ToArray();
+
+        for (var i = 0; i < randomIndices.Length; i++)
+        {
+            
             var part = armorParts[i];
+           
             if (part.isAttached) {
                 StartCoroutine(EnablePhysicsAfterSomeTime(part));
                 break;

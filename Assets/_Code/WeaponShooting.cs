@@ -1,15 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
 public class WeaponShooting : MonoBehaviour
 {
+ 
    [SerializeField] int shootButton;
    [SerializeField] private string enemyPlayerTag;
    [SerializeField] private PlayerArmour playerArmourScript;
+   [SerializeField] private PlayerController playerController;
+   private void Start()
+   {
+    //   Transform camera=playerController...
+   }
 
-    void Update()
+   void Update()
     {
         CheckInput();
         
@@ -19,22 +26,35 @@ public class WeaponShooting : MonoBehaviour
     
     void CheckInput()
     {
+      
         if (Input.GetMouseButtonDown(shootButton))
         {
-     CastRaycast();
+            Transform[] childrenCount;
+            childrenCount = gameObject.GetComponentsInChildren<Transform>();
+            
+            if (childrenCount.Length == 2)
+            {
+                Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
+                weapon.isAttached = true;
+                CastRaycast();
+            }
         }
     }
 
     void CastRaycast()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo))
+        
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo))
         {
-            //Add shooting Shader method
-            if (hitInfo.transform.gameObject.tag.Equals(enemyPlayerTag))
-            {
+            Debug.DrawRay(transform.position, transform.right,Color.blue);
                 
-                //Add method from PlayerArmour
-            }
+                //Add shooting Shader method
+                if (hitInfo.transform.gameObject.tag.Equals(enemyPlayerTag))
+                {
+
+                    //Add method from PlayerArmour
+                }
+            
         }
     }
 }
