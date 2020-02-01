@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XInput;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] int padIndex = 0;
+    public DynamicCamera dynamicCamera;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float jumpForce;
@@ -12,15 +12,19 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
     const string MOVEMENT_BLEND = "Speed";
+    const string DEATH_TRIGGER_NAME = "Death";
     const float AIM_WEIGHT_CHANGE_SPEED = 1f;
     const string JUMP_BLEND_NAME = "Jump";
     const string JUMP_FORWARD_BOOL_NAME = "JumpForward";
+    const string GROUND_HIT_TRIGGER_NAME = "HitGround";
+    const string PLAYER_HIT_TRIGGER_NAME = "Hit";
     const float JUMP_COOLDOWN = 1.5f;
     const float MIN_STICK_TILT = 0.05f;
     new Transform transform;
     Gamepad pad;
     float timeOfLastJump = -2f;
     bool equippingGun;
+    bool inputBlocked;
     
     void Awake() {
         transform = gameObject.transform;
@@ -37,6 +41,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+        if (inputBlocked)
+            return;
+        
         bool shiftDown;
         bool forwardKeyPressed;
         bool backwardKeyPressed;
@@ -89,12 +96,38 @@ public class PlayerController : MonoBehaviour {
                 transform.Rotate(0, rotationSpeed, 0);
         }
     }
+
+    Coroutine inputRestoreCor;
+    public void PlayHitAnimation(Transform otherPlayer) {
+        inputBlocked = true;
+        animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
+        var dir = transform.position - otherPlayer.position;
+        var lookRotation = Quaternion.LookRotation (dir);
+        transform.rotation = lookRotation;
+        if(inputRestoreCor != null)
+            StopCoroutine (inputRestoreCor);
+        inputRestoreCor = StartCoroutine (RestoreInput());
+    }
+
+    IEnumerator RestoreInput() {
+        yield return new WaitForSeconds (3f);
+        inputBlocked = false;
+    }
+
+    public void HandleGroundHit() {
+        animator.SetTrigger (GROUND_HIT_TRIGGER_NAME);
+    }
     [ContextMenu("Equip")]
     public void AnimateEquippingGun() {
         if(weightCor != null)
             StopCoroutine (weightCor);
         weightCor = StartCoroutine (UpperBodyWeightChangeCor (1f));
         equippingGun = true;
+    }
+
+    [ContextMenu("Die")]
+    public void PlayDeathAnimation() {
+        animator.SetTrigger (DEATH_TRIGGER_NAME);
     }
 
     Coroutine weightCor;
