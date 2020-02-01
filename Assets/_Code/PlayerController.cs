@@ -96,29 +96,22 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (leftKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND, 1);
+            animator.SetFloat (MOVEMENT_BLEND, shiftDown ? 2 : 1);
             transform.Rotate (0, -rotationSpeed, 0);
         }
         else if (rightKeyPressed) {
+            animator.SetFloat (MOVEMENT_BLEND,  shiftDown ? 2 : 1);
             transform.Rotate (0, rotationSpeed, 0);
-            animator.SetFloat (MOVEMENT_BLEND, 1);
         }
     }
 
     Coroutine inputRestoreCor;
-
     [ContextMenu ("Hit")]
-    void xd() {
-        PlayHitAnimation (transform);
-    }
-    public void PlayHitAnimation(Transform otherPlayer) {
+    public void PlayHitAnimation() {
         if (dead)
             return;
         inputBlocked = true;
         animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
-//        var dir = transform.position - otherPlayer.position;
-//        var lookRotation = Quaternion.LookRotation (dir);
-//        transform.rotation = lookRotation;
         if(inputRestoreCor != null)
             StopCoroutine (inputRestoreCor);
         inputRestoreCor = StartCoroutine (RestoreInput());

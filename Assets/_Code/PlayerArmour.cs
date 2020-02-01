@@ -31,16 +31,29 @@ public class PlayerArmour : MonoBehaviour
 
     public void RemoveRandomBodyPart()
     {
-        var randomParts = armorParts.OrderBy(x=>rnd.Next()).ToList();
+        var randomParts = GetParts().OrderBy(x=>rnd.Next()).ToList();
         for (int i = 0; i < randomParts.Count; i++)
         {
             var randomPart = randomParts[i];
-            if (randomPart.isAttached && randomPart.player1 == robotBody.player1)
+            if (i == 0)
             {
                 StartCoroutine(EnablePhysicsAfterSomeTime(randomPart));
-                break;
+            }
+            else {
+                //LerpArmourAwayAndBack();
             }
         }
+    }
+
+    IEnumerable<ArmourPart> GetParts() {
+        foreach (var armourPart in armorParts) {
+            if (DoesPartBelongToThisPlayer (armourPart))
+                yield return armourPart;
+        }
+    }
+
+    bool DoesPartBelongToThisPlayer(ArmourPart part) {
+        return part.isAttached && part.player1 == robotBody.player1;
     }
 
     IEnumerator EnablePhysicsAfterSomeTime(ArmourPart part) {
