@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class Island : MonoBehaviour
 {
@@ -8,19 +11,25 @@ public class Island : MonoBehaviour
     [SerializeField] Transform chunksParent;
     [SerializeField] Material chunkMaterial;
 
-    private Vector3 diff;
-    private bool mergeCompleted = false;
-    private Rigidbody[] rigidbodies;
+    Vector3 diff;
+    bool mergeCompleted = false;
+    List<Rigidbody> rigidbodies = new List<Rigidbody>();
 
     void Start()
     {
+        var islandMergeLocalPoint = transform.InverseTransformPoint(islandMergePoint.position);
+        
         diff = destination.position - islandMergePoint.position;
-
+        var chunks = new List<Transform>();
+        
+        
         for (var i = 0; i < chunksParent.childCount; i++) {
             var child = chunksParent.GetChild(i);
+            chunks.Add(child);
+            
             var meshCollider = child.gameObject.AddComponent<MeshCollider>();
             meshCollider.convex = true;
-            
+
             var rb = child.gameObject.AddComponent<Rigidbody>();
             rb.isKinematic = true;
 
@@ -31,7 +40,10 @@ public class Island : MonoBehaviour
             r.sharedMaterial = chunkMaterial;
         }
         
-        rigidbodies = chunksParent.GetComponentsInChildren<Rigidbody>();
+        chunks = chunks.OrderBy(x => -(islandMergeLocalPoint - x.GetComponent<MeshCollider>().bounds.center).magnitude).ToList();
+        foreach (var chunk in chunks) {
+            rigidbodies.Add(chunk.GetComponent<Rigidbody>());
+        }
     }
 
     void Update() {
@@ -53,8 +65,13 @@ public class Island : MonoBehaviour
     }
 
     void StartFragmenting() {
+        StartCoroutine(FallingCor());
+    }
+
+    IEnumerator FallingCor() {
         foreach (var r in rigidbodies) {
             r.isKinematic = false;
+            yield return new WaitForSeconds(0.6f);
         }
     }
 }
