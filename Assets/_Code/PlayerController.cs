@@ -132,6 +132,8 @@ public class PlayerController : MonoBehaviour {
     }
     [ContextMenu("Equip")]
     public void AnimateEquippingGun() {
+        if(dead || inputBlocked)
+            return;
         if(weightCor != null)
             StopCoroutine (weightCor);
         weightCor = StartCoroutine (UpperBodyWeightChangeCor (1f));
@@ -140,12 +142,15 @@ public class PlayerController : MonoBehaviour {
 
     [ContextMenu("Die")]
     public void PlayDeathAnimation() {
+        if (dead)
+            return;
         animator.SetLayerWeight (1, 0);
         inputBlocked = true;
         dead = true;
         rb.constraints = RigidbodyConstraints.FreezeRotationY;
         animator.applyRootMotion = true;
         animator.SetTrigger (DEATH_TRIGGER_NAME);
+        dynamicCamera.EnableWastedPositioning();
     }
 
     Coroutine weightCor;

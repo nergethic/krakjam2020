@@ -19,6 +19,7 @@ public class DynamicCamera : MonoBehaviour {
     new Transform transform;
     bool playerReached;
     bool groundHit;
+    bool playerIsDead;
 
     void Awake() {
         transform = gameObject.transform;
@@ -27,6 +28,12 @@ public class DynamicCamera : MonoBehaviour {
 
     void HandleGroundHit() {
         groundHit = true;
+    }
+
+    public void EnableWastedPositioning() {
+        playerIsDead = true;
+        movementSpeed /= 3f;
+        rotationSpeed /= 3f;
     }
 
     IEnumerator Start() {
@@ -65,6 +72,8 @@ public class DynamicCamera : MonoBehaviour {
     }
 
     Vector3 GetCameraTargetPosition() {
+        if (playerIsDead)
+            return player.position + Vector3.up * 10f;
         return player.position - player.forward * backOffset + player.up * upOffset;
     }
 }
