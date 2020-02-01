@@ -47,9 +47,12 @@ public class PlayerArmour : MonoBehaviour
 
                 if (distanceBetweenArmourAndArmourPlaceholder <= distanceWhenParent)
                 {
-                    structList[i].ArmourPartTransform.position = structList[i].bodyPart.transform.position;
-                    structList[i].ArmourPartTransform.rotation = structList[i].bodyPart.transform.rotation;
-                    structList[i].ArmourPartTransform.parent = structList[i].bodyPart.gameObject.transform;
+                    var armourPartTransform = structList[i].ArmourPartTransform;
+                    var bodyPart = structList[i].bodyPart;
+                    armourPartTransform.position = bodyPart.transform.position;
+                    armourPartTransform.rotation = bodyPart.transform.rotation;
+                    armourPartTransform.parent = bodyPart.gameObject.transform;
+                    armourPartTransform.GetComponent<ArmourPart>().isAttached = true;
                     if (structList[i].coroutine != null)
                         StopCoroutine(structList[i].coroutine);
                     structList.Remove(structList[i]);

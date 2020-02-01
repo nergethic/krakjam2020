@@ -6,7 +6,8 @@ using UnityEngine.Experimental.PlayerLoop;
 public class WeaponShooting : MonoBehaviour
 {
    [SerializeField] int shootButton;
-    
+   [SerializeField] private string enemyPlayerTag;
+   [SerializeField] private PlayerArmour playerArmour;
     void Update()
     {
         CheckInput();
@@ -24,7 +25,11 @@ public class WeaponShooting : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo))
         {
-           
+            if (hitInfo.transform.gameObject.tag.Equals(enemyPlayerTag))
+            {
+                
+                //Add method 
+            }
         }
     }
 }
