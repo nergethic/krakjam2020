@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\piotr\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\piotr\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_krakjam2020.-840106802.00" t="ExcludeRecursive" />
-    <e p="D:\Users\piotr\OneDrive\Dokumenty\krakjam2020" t="IncludeRecursive">
+    <e p="C:\Users\Patryk\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Patryk\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_KrakJam2020.691968254.00" t="ExcludeRecursive" />
+    <e p="E:\Repos\krakjam2020" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_Code" t="Include">
           <e p="CatapultShoot.cs" t="Include" />
+          <e p="DynamicCamera.cs" t="Include" />
           <e p="GrassSpawner.cs" t="Include" />
           <e p="Island.cs" t="Include" />
-          <e p="PlayerArmour.cs" t="Include" />
+          <e p="PlayerController.cs" t="Include" />
           <e p="PoissonSampler.cs" t="Include" />
           <e p="RockExplosionParticle.cs" t="Include" />
+        </e>
+        <e p="BOXOPHOBIC" t="Include">
+          <e p="Skybox Cubemap Extended" t="Include">
+            <e p="Core" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="Skybox Cubemap Extended.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Utils" t="Include">
+            <e p="CGIncludes" t="Include">
+              <e p="VS_indirect.cginc" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="BConst.cs" t="Include" />
+              <e p="BEditorGUI.cs" t="Include" />
+              <e p="BEditorUtils.cs" t="Include" />
+              <e p="BVersion.cs" t="Include" />
+            </e>
+            <e p="PropertyDrawers" t="Include">
+              <e p="BCategoryAttribute.cs" t="Include" />
+              <e p="BInteractiveAttribute.cs" t="Include" />
+              <e p="BMessageAttribute.cs" t="Include" />
+              <e p="BRangeOptionsAttribute.cs" t="Include" />
+              <e p="BRangeSimpleAttribute.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="BBannerDrawer.cs" t="Include" />
+                <e p="BCategoryAttributeDrawer.cs" t="Include" />
+                <e p="BCategoryDrawer.cs" t="Include" />
+                <e p="BInteractiveAttributeDrawer.cs" t="Include" />
+                <e p="BInteractiveDrawer.cs" t="Include" />
+                <e p="BMessageAttributeDrawer.cs" t="Include" />
+                <e p="BMessageDrawer.cs" t="Include" />
+                <e p="BRangeOptionsAttributeDrawer.cs" t="Include" />
+                <e p="BRangeSimpleAttributeDrawer.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="SimpleLit Prototype Terrain.shader" t="Include" />
+              <e p="StandardLit Prototype Terrain.shader" t="Include" />
+              <e p="Unlit Prototype Ground.shader" t="Include" />
+              <e p="Unlit Prototype Skybox.shader" t="Include" />
+            </e>
+          </e>
         </e>
       </e>
       <e p="krakjam2020.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
-      <e p="packages" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>
