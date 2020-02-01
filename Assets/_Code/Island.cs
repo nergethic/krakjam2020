@@ -63,18 +63,24 @@ public class Island : MonoBehaviour {
             pos += diff * Time.deltaTime / timeToMergeInSeconds;
         } else {
             mergeCompleted = true;
-            StartFragmenting();
+            shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
         }
 
         transform.position = pos;
     }
 
-    void StartFragmenting() {
+    public void StartFragmenting() {
         StartCoroutine(FallingCor());
     }
 
     IEnumerator FallingCor() {
-        foreach (var r in rigidbodies) {
+        for (var i = 0; i < 4; i++) {
+            rigidbodies[i].isKinematic = false;
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        for (var i = 4; i < rigidbodies.Count; i++) {
+            var r = rigidbodies[i];
             var outDir = (r.GetComponent<MeshCollider>().bounds.center - islandCenter.position).normalized / 5f;
 
             var pos = r.transform.position;
