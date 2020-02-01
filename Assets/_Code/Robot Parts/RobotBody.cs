@@ -13,9 +13,9 @@ namespace _Code.Robot_Parts {
                     if (!bodyPart.IsOccupied)
                         return (true, bodyPart);
                     if (centerBodyTypes.Contains(bodyPart.Type)) {
-                        var (found, part) = GetOtherSidePart(bodyPart);
+                        var (found, otherSidePart) = GetOtherSidePart(bodyPart);
                         if (found)
-                            return (true, bodyPart);
+                            return (true, otherSidePart);
                     }
                 }
             }

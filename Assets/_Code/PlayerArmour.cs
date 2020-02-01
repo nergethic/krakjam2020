@@ -1,45 +1,60 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Code.Robot_Parts;
 using UnityEngine;
 
-public class PlayerArmour : MonoBehaviour
-{   
-    [SerializeField] private Transform armourBodyPlace;
-    [SerializeField] private float flyTime = 1;
-    private List<GameObject> armourInTriggerList= new List<GameObject>();
-    private string armourTag = "Armour";
+struct ArmourAndArmourPlaceholder
+{
+    public Coroutine coroutine;
+    public BodyPart bodyPart;
+    public Transform ArmourPartTransform;
 
-   float distanceWhenParent=0.05f;
+    public ArmourAndArmourPlaceholder(BodyPart bodyPart, Transform armourPart, Coroutine coroutine)
+    {
+        this.bodyPart = bodyPart;
+        this.ArmourPartTransform = armourPart;
+        this.coroutine = coroutine;
+    }
+}
+
+public class PlayerArmour : MonoBehaviour
+{
+    [SerializeField] private RobotBody robotBody;
+    [SerializeField] float distanceWhenParent = 0.05f;
+    [SerializeField] private float flyTime = 1;
+    private List<ArmourAndArmourPlaceholder> structList = new List<ArmourAndArmourPlaceholder>();
+    private string armourTag = "Armour";
     private Coroutine cor;
     private void OnTriggerEnter(Collider other)
     {
-       CheckIsTriggerEnterWithArmour(other);
+        CheckIsTriggerEnterWithArmour(other);
     }
 
     private void Update()
     {
-        CheckIsArmourCloseToArmourPlace();  
+        CheckIsArmourCloseToArmourPlace();
     }
 
     void CheckIsArmourCloseToArmourPlace()
     {
-        if (armourInTriggerList != null)
+        if (structList != null)
         {
-            for (int i = 0; i < armourInTriggerList.Count; i++)
+            for (int i = 0; i < structList.Count; i++)
             {
-                //armourBodyPlace trzeba podstawić odpowiedniego z Enuma
-                float distanceBetweenArmourAndArmourPlaceholder = Vector3.Distance(armourInTriggerList[i].transform.position, armourBodyPlace.transform.position);
-              
+                float distanceBetweenArmourAndArmourPlaceholder = Vector3.Distance(
+                    structList[i].ArmourPartTransform.position, structList[i].bodyPart.transform.position);
+
                 if (distanceBetweenArmourAndArmourPlaceholder <= distanceWhenParent)
                 {
-                  
-                    StopCoroutine(cor);
-                    armourInTriggerList[i].transform.parent = armourBodyPlace.gameObject.transform;
-                    armourInTriggerList.Remove(armourInTriggerList[i]);
+                    structList[i].ArmourPartTransform.position = structList[i].bodyPart.transform.position;
+                    structList[i].ArmourPartTransform.rotation = structList[i].bodyPart.transform.rotation;
+                    structList[i].ArmourPartTransform.parent = structList[i].bodyPart.gameObject.transform;
+                    if (structList[i].coroutine != null)
+                        StopCoroutine(structList[i].coroutine);
+                    structList.Remove(structList[i]);
                 }
             }
-           
         }
     }
 
@@ -47,27 +62,33 @@ public class PlayerArmour : MonoBehaviour
     {
         if (other.tag.Equals(armourTag))
         {
-            armourInTriggerList.Add(other.gameObject);
-           
-           cor= StartCoroutine(ArmourTravelToPlayer(other.gameObject));
-        } 
+            var go = other.gameObject;
+            var armorPart = go.GetComponent<ArmourPart>();
+            if (armorPart == null)
+                return;
+            var (exists, type) = robotBody.GetBodyPart(armorPart.bodyType);
+
+            if (exists)
+            {
+                type.SetOccupied(true);
+                Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.gameObject, type));
+                var structItem = new ArmourAndArmourPlaceholder(type, other.transform, cor);
+                structList.Add(structItem);
+            }
+        }
     }
 
-   IEnumerator ArmourTravelToPlayer(GameObject armour)
-   {
-       var elapsedTime = 0f;
-       while (elapsedTime<flyTime)
-       {
-           armour.transform.position = Vector3.Lerp(armour.transform.position, armourBodyPlace.position,elapsedTime/flyTime);
-           
-           
-         
-           armour.transform.rotation=Quaternion.Lerp(armour.transform.rotation, armourBodyPlace.rotation,elapsedTime/flyTime);
-           elapsedTime += Time.deltaTime;
-           yield return null;
-       }
-
-       
-   }
-   
+    IEnumerator ArmourTravelToPlayer(GameObject armour, BodyPart bodyPart)
+    {
+        var elapsedTime = 0f;
+        while (elapsedTime < flyTime)
+        {
+            armour.transform.position = Vector3.Lerp(armour.transform.position, bodyPart.transform.position,
+                elapsedTime / flyTime);
+            armour.transform.rotation = Quaternion.Lerp(armour.transform.rotation, bodyPart.transform.rotation,
+                elapsedTime / flyTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
 }

@@ -12,8 +12,11 @@ namespace _Code.Robot_Parts {
         public BodySide Side => side;
         public BodyType Type => type;
         public bool IsOccupied => isOccupied;
-        
-        //void AttachArmor(ArmorPart armor){}
+
+        public void SetOccupied(bool value)
+        {
+            isOccupied = value;
+        }
 
         [Serializable]
         public enum BodyType { Wrist = 0, Shoulder = 1, Helm = 2, Chest = 3, Leg = 4 }
