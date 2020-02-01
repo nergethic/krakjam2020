@@ -1,28 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using EZCameraShake;
+using UnityEditor;
 using UnityEngine;
 
-public class Island : MonoBehaviour
-{
-    [SerializeField]  Transform islandMergePoint;
+public class Island : MonoBehaviour {
+    [SerializeField] Transform islandCenter;
+    [SerializeField] Transform islandMergePoint;
     [SerializeField] Transform destination;
     [SerializeField] float timeToMergeInSeconds;
     [SerializeField] Transform chunksParent;
     [SerializeField] Material chunkMaterial;
-
+    [SerializeField] CameraShaker shaker;
+    List<Transform> chunks;
+    List<Rigidbody> rigidbodies;
     Vector3 diff;
     bool mergeCompleted = false;
-    List<Rigidbody> rigidbodies = new List<Rigidbody>();
+    
 
     void Start()
     {
         var islandMergeLocalPoint = transform.InverseTransformPoint(islandMergePoint.position);
         
         diff = destination.position - islandMergePoint.position;
-        var chunks = new List<Transform>();
-        
-        
+
+        chunks = new List<Transform>();
+        rigidbodies = new List<Rigidbody>();
+
         for (var i = 0; i < chunksParent.childCount; i++) {
             var child = chunksParent.GetChild(i);
             chunks.Add(child);
@@ -70,8 +75,33 @@ public class Island : MonoBehaviour
 
     IEnumerator FallingCor() {
         foreach (var r in rigidbodies) {
+            var outDir = (r.GetComponent<MeshCollider>().bounds.center - islandCenter.position).normalized / 5f;
+
+            var pos = r.transform.position;
+            float elapsedTime = 0f;
+            float waitTime = 0.1f;
+            while (elapsedTime < waitTime)
+            {
+                r.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.down/6f), (elapsedTime / waitTime));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            if (shaker != null)
+                shaker.ShakeOnce(1.86f, 0.57f, 0.1f, 0.3f);
+            
+            yield return new WaitForSeconds(0.25f);
+
             r.isKinematic = false;
-            yield return new WaitForSeconds(0.6f);
+            
+            yield return new WaitForSeconds(0.5f);
         }
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Collect Refs")]
+    public void CollectRefs() {
+        Undo.RecordObject(this, "refs");
+    }
+#endif
 }
