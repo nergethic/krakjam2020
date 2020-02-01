@@ -36,6 +36,7 @@ public class DynamicCamera : MonoBehaviour {
             yield return null;
         playerController.HandleGroundHit();
         yield return new WaitForSeconds (startPointLookDuration);
+        playerController.UnlockInput();
         var progress = 0f;
         while (progress < 1) {
             var targetPosition = GetCameraTargetPosition();
@@ -54,7 +55,7 @@ public class DynamicCamera : MonoBehaviour {
         if(!playerReached)
             return;
         var targetPosition = GetCameraTargetPosition();
-        var dir = (playerHead.position - targetPosition);
+        var dir = playerHead.position - targetPosition;
         var movSpeedMultiplier = deltaTranslationToSpeedMultiplier.Evaluate (dir.magnitude);
         transform.position = Vector3.Lerp (transform.position, targetPosition, Time.deltaTime * movementSpeed * movSpeedMultiplier);
 
