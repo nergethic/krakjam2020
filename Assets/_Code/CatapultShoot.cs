@@ -6,22 +6,22 @@ using UnityEngine;
 
 
 public class CatapultShoot : MonoBehaviour
-{
+{  
+    [SerializeField] Vector3[] positions = new Vector3[50];
+    [SerializeField] Transform rockStartTransform;
+    [SerializeField]  float flyTime = 4.0f;
+    [SerializeField] private float distanceToGiveDMG = 2;
     [SerializeField] private Transform enemyPlayerTransform;
     [SerializeField] private GameObject rockPrefab;
     [SerializeField] private bool drawGizmos;
+    public Vector3 middlePointOnCurve;
     private KeyCode launchKeycode=KeyCode.E;
-    [SerializeField] Transform rockStartTransform;
     private bool isShooting = false;
     private GameObject rockClone;
     private Vector3 enemyPositionInShootMoment;
     private Coroutine cor;
     private bool canShoot=true;
     private int numPoints = 50;
-    [SerializeField] Vector3[] positions = new Vector3[50];
-    public Vector3 middlePointOnCurve;
-   [ SerializeField]  float flyTime = 4.0f;
-   [SerializeField] private float distanceToGiveDMG = 2;
     private GameObject explosionParticle;
 
     private void Awake()
