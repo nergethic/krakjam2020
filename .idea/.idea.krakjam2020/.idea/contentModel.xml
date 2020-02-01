@@ -33,6 +33,9 @@
           <e p="Weapon.cs" t="Include" />
           <e p="WeaponShooting.cs" t="Include" />
         </e>
+        <e p="_Materials" t="Include">
+          <e p="lasershit.shader" t="Include" />
+        </e>
         <e p="BOXOPHOBIC" t="Include">
           <e p="Skybox Cubemap Extended" t="Include">
             <e p="Core" t="Include">

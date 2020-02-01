@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPointLookDuration: 4
   movementSpeed: 3
-  rotationSpeed: 3
+  rotationSpeed: 4
   backOffset: 2.3
   upOffset: 2.5
   curve:
@@ -185,4 +185,6 @@ MonoBehaviour:
   startPoint: {fileID: 0}
   startLookAtTarget: {fileID: 0}
   player: {fileID: 0}
+  playerController: {fileID: 0}
   playerHead: {fileID: 0}
+  groudImpacter: {fileID: 0}

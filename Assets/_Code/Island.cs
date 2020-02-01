@@ -80,28 +80,40 @@ public class Island : MonoBehaviour {
             yield return new WaitForSeconds(0.2f);
         }
 
+        int count = 0;
+        var bundle = new List<Rigidbody>();
+        float bundleTime = 0f;
         for (var i = 4; i < rigidbodies.Count; i++) {
             var r = rigidbodies[i];
             var outDir = (r.GetComponent<MeshCollider>().bounds.center - islandCenter.position).normalized / 5f;
 
             var pos = r.transform.position;
             float elapsedTime = 0f;
-            float waitTime = 0.1f;
+            float waitTime = 0.15f;
             while (elapsedTime < waitTime)
             {
-                r.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.down/6f), (elapsedTime / waitTime));
+                r.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.down/3f), (elapsedTime / waitTime));
                 elapsedTime += Time.deltaTime;
+                bundleTime += Time.deltaTime;
                 yield return null;
             }
 
-            if (shaker != null)
-                shaker.ShakeOnce(1.86f, 0.57f, 0.1f, 0.3f);
+            bundle.Add(r);
             
-            yield return new WaitForSeconds(0.25f);
-
-            r.isKinematic = false;
+            if (bundleTime > 2.5f) {
+                foreach (var brb in bundle) {
+                    brb.isKinematic = false;
+                    brb.AddForce(outDir*10f, ForceMode.Impulse);
+                    yield return new WaitForSeconds(0.06f);
+                }
+                if (shaker != null)
+                    shaker.ShakeOnce(1.9f, 0.57f, 0.1f, 0.3f);
+                yield return new WaitForSeconds(0.8f);
+                bundleTime = 0f;
+                bundle.Clear();
+            }
             
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
