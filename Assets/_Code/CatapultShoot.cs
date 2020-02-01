@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Code.Robot_Parts;
 using UnityEngine;
 
 
@@ -26,11 +27,6 @@ public class CatapultShoot : MonoBehaviour
     private GameObject explosionParticle;
     
 
-    private void Awake()
-    {
-        
-        rockStartTransform = gameObject.transform;
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -53,6 +49,7 @@ public class CatapultShoot : MonoBehaviour
                 enemyPositionInShootMoment = enemyPlayerTransform.position;
             }
         }
+        
     }
 
     void Update()
@@ -141,8 +138,9 @@ public class CatapultShoot : MonoBehaviour
 
     void DealDMGToPlayer()
     {
-        Debug.Log("GET HIT");
-        //deal dmg to player implementation
+      
+      PlayerArmour playerArmour=  enemyPlayerTransform.GetComponent<PlayerArmour>();
+      playerArmour.RemoveRandomBodyPart();
     }
 
     void PlayeExplosionParticle()
