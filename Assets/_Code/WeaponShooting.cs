@@ -7,12 +7,16 @@ public class WeaponShooting : MonoBehaviour
 {
    [SerializeField] int shootButton;
    [SerializeField] private string enemyPlayerTag;
-   [SerializeField] private PlayerArmour playerArmour;
+   [SerializeField] private PlayerArmour playerArmourScript;
+
     void Update()
     {
         CheckInput();
+        
     }
 
+    
+    
     void CheckInput()
     {
         if (Input.GetMouseButtonDown(shootButton))
@@ -25,10 +29,11 @@ public class WeaponShooting : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo))
         {
+            //Add shooting Shader method
             if (hitInfo.transform.gameObject.tag.Equals(enemyPlayerTag))
             {
                 
-                //Add method 
+                //Add method from PlayerArmour
             }
         }
     }

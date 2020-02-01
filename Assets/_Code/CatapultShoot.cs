@@ -14,6 +14,7 @@ public class CatapultShoot : MonoBehaviour
     [SerializeField] private Transform enemyPlayerTransform;
     [SerializeField] private GameObject rockPrefab;
     [SerializeField] private bool drawGizmos;
+    [SerializeField] private string playerTag;
     public Vector3 middlePointOnCurve;
     private KeyCode launchKeycode=KeyCode.E;
     private bool isShooting = false;
@@ -23,6 +24,7 @@ public class CatapultShoot : MonoBehaviour
     private bool canShoot=true;
     private int numPoints = 50;
     private GameObject explosionParticle;
+    
 
     private void Awake()
     {
@@ -30,26 +32,31 @@ public class CatapultShoot : MonoBehaviour
         rockStartTransform = gameObject.transform;
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals(playerTag))
+        {
+            if (Input.GetKeyDown(launchKeycode) && canShoot)
+            {
+                canShoot = false;
+                isShooting = true;
+                if (rockClone != null)
+                {
+                    rockClone.SetActive(true);
+                    rockClone.transform.position = rockStartTransform.position;
+                }
+                else
+                {
+                    rockClone = Instantiate(rockPrefab, rockStartTransform.position, rockStartTransform.rotation);
+                }
 
+                enemyPositionInShootMoment = enemyPlayerTransform.position;
+            }
+        }
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(launchKeycode)&&canShoot)
-        {
-            canShoot = false;
-            isShooting = true;
-            if (rockClone != null)
-            {
-                rockClone.SetActive(true);
-                rockClone.transform.position = rockStartTransform.position;
-            }
-            else
-            {
-                rockClone = Instantiate(rockPrefab, rockStartTransform.position, rockStartTransform.rotation);
-            }
-
-            enemyPositionInShootMoment = enemyPlayerTransform.position;
-        }
 
         if (isShooting)
         {
