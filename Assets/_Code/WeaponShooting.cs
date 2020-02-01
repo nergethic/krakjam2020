@@ -1,15 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
 public class WeaponShooting : MonoBehaviour
 {
+ 
    [SerializeField] int shootButton;
    [SerializeField] private string enemyPlayerTag;
-   [SerializeField] private PlayerArmour playerArmourScript;
+  
+   [SerializeField] private Transform camera;
 
-    void Update()
+   private int layerMask;
+  // [SerializeField] private PlayerController playerController;
+   private void Start()
+   {
+        layerMask = 1 << LayerMask.NameToLayer ("Player"); // only check for collisions with layerX
+    //   Transform camera=playerController...
+   }
+
+   void Update()
     {
         CheckInput();
         
@@ -19,22 +30,44 @@ public class WeaponShooting : MonoBehaviour
     
     void CheckInput()
     {
+      
         if (Input.GetMouseButtonDown(shootButton))
         {
-     CastRaycast();
+            Transform[] childrenCount;
+            childrenCount = gameObject.GetComponentsInChildren<Transform>();
+            
+            if (childrenCount.Length == 2)
+            {
+                Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
+                weapon.isAttached = true;
+                CastRaycast();
+            }
         }
     }
 
     void CastRaycast()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo))
-        {
-            //Add shooting Shader method
-            if (hitInfo.transform.gameObject.tag.Equals(enemyPlayerTag))
-            {
+       var ray=new Ray(camera.position,camera.forward);
+       RaycastHit hit;
+     
+       if (Physics.Raycast(ray, out hit, 500,layerMask))
+       {
+           //Add shooting Shader method
+           Debug.Log(hit.collider.gameObject.name);
+           
+           if (hit.transform.gameObject.tag.Equals(enemyPlayerTag))
+           {
+               PlayerArmour playerArmour = hit.transform.gameObject.GetComponent<PlayerArmour>();
+               playerArmour.RemoveRandomBodyPart();
+           }
+       }
+        
+     
+            
                 
-                //Add method from PlayerArmour
-            }
-        }
+              
+              
+            
+        
     }
 }

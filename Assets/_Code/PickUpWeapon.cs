@@ -24,7 +24,10 @@ public class PickUpWeapon : MonoBehaviour
 
     void ParentWeaponToPlayer(Weapon weapon)
     {
-        weapon.transform.parent = weaponPlaceInPlayer.transform;
+      var weaponTransform= weapon.transform;
+      weaponTransform.position = weaponPlaceInPlayer.position;
+      weaponTransform.rotation = weaponPlaceInPlayer.rotation;
+      weaponTransform.parent = weaponPlaceInPlayer;
         weapon.isAttached = true;
     }
 }
