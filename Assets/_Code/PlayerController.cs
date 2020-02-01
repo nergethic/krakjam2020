@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XInput;
 
 public class PlayerController : MonoBehaviour {
+    [SerializeField] int padIndex = 0;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float jumpForce;
@@ -13,17 +16,54 @@ public class PlayerController : MonoBehaviour {
     const string JUMP_BLEND_NAME = "Jump";
     const string JUMP_FORWARD_BOOL_NAME = "JumpForward";
     const float JUMP_COOLDOWN = 1.5f;
+    const float MIN_STICK_TILT = 0.05f;
     new Transform transform;
+    Gamepad pad;
     float timeOfLastJump = -2f;
     bool equippingGun;
-
+    
     void Awake() {
         transform = gameObject.transform;
+        AssignGamepad();
     }
+
+    void AssignGamepad() {
+        var pads = Gamepad.all;
+        if (pads[padIndex] == null) {
+            Debug.Log($"Pad by index {padIndex} is not connected");
+            return;
+        }
+        pad = pads[padIndex];
+    }
+
     void Update() {
-        var shiftDown = Input.GetKey (KeyCode.LeftShift);
-        var forwardKeyPressed = Input.GetKey (KeyCode.W);
-        var backwardKeyPressed = Input.GetKey (KeyCode.S);
+        bool shiftDown;
+        bool forwardKeyPressed;
+        bool backwardKeyPressed;
+        bool leftKeyPressed;
+        bool rightKeyPressed;
+        bool jumpPressed;
+        
+        if(pad == null) {
+            shiftDown = Input.GetKey(KeyCode.LeftShift);
+            forwardKeyPressed = Input.GetKey(KeyCode.W);
+            backwardKeyPressed = Input.GetKey(KeyCode.S);
+            leftKeyPressed = Input.GetKey(KeyCode.A);
+            rightKeyPressed = Input.GetKey(KeyCode.D);
+            jumpPressed = Input.GetKeyDown(KeyCode.Space);
+        }
+        else {
+            shiftDown = pad.rightTrigger.isPressed;
+            var leftStick = pad.leftStick.ReadValue();
+
+            forwardKeyPressed = leftStick.y > MIN_STICK_TILT;
+            backwardKeyPressed = leftStick.y < -MIN_STICK_TILT;
+            rightKeyPressed = leftStick.x > MIN_STICK_TILT;
+            leftKeyPressed = leftStick.x < -MIN_STICK_TILT;
+            
+            jumpPressed = pad.aButton.isPressed;
+        }
+        
         if (forwardKeyPressed) {
             animator.SetFloat(MOVEMENT_BLEND, shiftDown ? 2 : 1);
             transform.position += transform.forward * (shiftDown ? runSpeed : walkSpeed);
@@ -36,16 +76,16 @@ public class PlayerController : MonoBehaviour {
             animator.SetFloat (MOVEMENT_BLEND, 0);
         }
 
-        if (Input.GetKeyDown (KeyCode.Space) && Time.time > timeOfLastJump + JUMP_COOLDOWN) {
+        if (jumpPressed && Time.time > timeOfLastJump + JUMP_COOLDOWN) {
             animator.SetTrigger (forwardKeyPressed ? JUMP_FORWARD_BOOL_NAME : JUMP_BLEND_NAME);
             rb.AddForce (Vector3.Lerp (transform.forward, Vector3.up, 0.5f) * jumpForce, ForceMode.Impulse);
             timeOfLastJump = Time.time;
         }
 
         if (forwardKeyPressed || backwardKeyPressed || equippingGun) {
-            if (Input.GetKey (KeyCode.A))
+            if (leftKeyPressed)
                 transform.Rotate(0, -rotationSpeed, 0);
-            else if (Input.GetKey (KeyCode.D))
+            else if (rightKeyPressed)
                 transform.Rotate(0, rotationSpeed, 0);
         }
     }
@@ -75,5 +115,9 @@ public class PlayerController : MonoBehaviour {
             StopCoroutine (weightCor);
         weightCor = StartCoroutine (UpperBodyWeightChangeCor (0f));
         equippingGun = false;
+    }
+
+    bool Approximately(float a, float b, float tolerance) {
+        return Mathf.Abs(a - b) < tolerance;
     }
 }
