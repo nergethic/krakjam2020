@@ -16,6 +16,8 @@ public class CatapultShoot : MonoBehaviour
     [SerializeField] private GameObject rockPrefab;
     [SerializeField] private bool drawGizmos;
     [SerializeField] private string playerTag;
+    [SerializeField] private GameObject Popup;
+    [SerializeField] private Transform cameraTransform;
     public Vector3 middlePointOnCurve;
     private KeyCode launchKeycode=KeyCode.E;
     private bool isShooting = false;
@@ -48,8 +50,20 @@ public class CatapultShoot : MonoBehaviour
 
                 enemyPositionInShootMoment = enemyPlayerTransform.position;
             }
+            Popup.SetActive(true);
+            Popup.transform.LookAt(cameraTransform);
         }
         
+        
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Equals(playerTag))
+        {
+            Popup.SetActive(false);
+        }
     }
 
     void Update()
@@ -139,7 +153,7 @@ public class CatapultShoot : MonoBehaviour
     void DealDMGToPlayer()
     {
       
-      PlayerArmour playerArmour=  enemyPlayerTransform.GetComponent<PlayerArmour>();
+      PlayerArmour playerArmour= enemyPlayerTransform.GetComponent<PlayerArmour>();
       playerArmour.RemoveRandomBodyPart();
     }
 

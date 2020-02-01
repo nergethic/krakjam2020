@@ -7,8 +7,10 @@ public class GroundImpacter : MonoBehaviour {
     public Action OnGroundHit;
     [SerializeField] CameraShaker[] shakers;
     [SerializeField] Camera leftCamera;
+    [SerializeField] Camera leftUICamera;
     [SerializeField] DynamicCamera dynamicCamera;
     [SerializeField] Camera rightCamera;
+    [SerializeField] Camera rightUICamera;
     [SerializeField] Island island;
     [SerializeField] Transform groundPoint;
     [SerializeField] Transform player1;
@@ -21,6 +23,8 @@ public class GroundImpacter : MonoBehaviour {
         yield return new WaitForSeconds (dynamicCamera.startPointLookDuration);
         leftCamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
         rightCamera.rect = new Rect(0.5f, 0f, 1f, 1f);
+        leftUICamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
+        rightUICamera.rect = new Rect(0.5f, 0f, 1f, 1f);
     }
     
     void Execute() {
