@@ -2,27 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Code.Robot_Parts;
+using UnityEditor;
 using UnityEngine;
+using BodyPart = _Code.Robot_Parts.BodyPart;
 
-struct ArmourAndArmourPlaceholder
-{
-    public Coroutine coroutine;
-    public BodyPart bodyPart;
-    public Transform ArmourPartTransform;
-
-    public ArmourAndArmourPlaceholder(BodyPart bodyPart, Transform armourPart, Coroutine coroutine)
-    {
-        this.bodyPart = bodyPart;
-        this.ArmourPartTransform = armourPart;
-        this.coroutine = coroutine;
-    }
-}
 
 public class PlayerArmour : MonoBehaviour
 {
-    [SerializeField] private RobotBody robotBody;
+    [SerializeField] RobotBody robotBody;
     [SerializeField] float distanceWhenParent = 0.05f;
-    [SerializeField] private float flyTime = 1;
+    [SerializeField] float flyTime = 1;
+    [SerializeField] ArmourPart[] armorParts;
     private List<ArmourAndArmourPlaceholder> structList = new List<ArmourAndArmourPlaceholder>();
     private string armourTag = "Armour";
     private Coroutine cor;
@@ -34,6 +24,45 @@ public class PlayerArmour : MonoBehaviour
     private void Update()
     {
         CheckIsArmourCloseToArmourPlace();
+    }
+
+    public void RemoveRandomBodyPart() {
+        for (var i = 0; i < armorParts.Length; i++) {
+            var part = armorParts[i];
+            if (part.isAttached) {
+                StartCoroutine(EnablePhysicsAfterSomeTime(part));
+                break;
+            }
+        }
+    }
+
+    IEnumerator EnablePhysicsAfterSomeTime(ArmourPart part) {
+        foreach (var bodySocket in robotBody.GetBodyParts()) {
+            if (bodySocket.IsOccupied && bodySocket.armourPart == part) {
+                bodySocket.SetOccupied(false, null);
+                break;
+            }
+        }
+        part.isAttached = false;
+        part.transform.SetParent(null);
+        var rb = part.GetComponent<Rigidbody>();
+
+        float elapsedTime = 0f;
+        float waitTime = 0.1f;
+        var pos = part.transform.position;
+        var outDir = (pos + transform.forward).normalized * 0.7f;
+        while (elapsedTime < waitTime)
+        {
+            part.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.up/3f), (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        rb.isKinematic = false;
+        rb.AddForce(-transform.forward*8f, ForceMode.Impulse);
+        rb.useGravity = true;
+        var child = part.transform.GetChild(0);
+        child.gameObject.SetActive(true);
     }
 
     void CheckIsArmourCloseToArmourPlace()
@@ -61,37 +90,67 @@ public class PlayerArmour : MonoBehaviour
         }
     }
 
-    void CheckIsTriggerEnterWithArmour(Collider other)
-    {
-        if (other.tag.Equals(armourTag))
-        {
+    void CheckIsTriggerEnterWithArmour(Collider other) {
+        if (other.tag.Equals(armourTag)) {
             var go = other.gameObject;
             var armorPart = go.GetComponent<ArmourPart>();
             if (armorPart == null)
                 return;
-            var (exists, type) = robotBody.GetBodyPart(armorPart.bodyType);
+            var (exists, armorSocket) = robotBody.GetBodyPart(armorPart.bodyType);
 
-            if (exists)
-            {
-                type.SetOccupied(true);
-                Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.gameObject, type));
-                var structItem = new ArmourAndArmourPlaceholder(type, other.transform, cor);
+            if (exists) {
+                armorSocket.SetOccupied(true, armorPart);
+                Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.transform, armorSocket));
+                var structItem = new ArmourAndArmourPlaceholder(armorSocket, other.transform, cor);
                 structList.Add(structItem);
             }
         }
     }
 
-    IEnumerator ArmourTravelToPlayer(GameObject armour, BodyPart bodyPart)
-    {
+    IEnumerator ArmourTravelToPlayer(Transform armour, BodyPart bodyPart) {
+        var triggerCol = armour.GetComponentInChildren<BoxCollider>();
+        if (triggerCol == null)
+            Debug.LogError("no trigger collider on armor part!");
+
+        armour.GetComponentInChildren<Rigidbody>().isKinematic = true;
+        triggerCol.gameObject.SetActive(false);
+        
         var elapsedTime = 0f;
         while (elapsedTime < flyTime)
         {
-            armour.transform.position = Vector3.Lerp(armour.transform.position, bodyPart.transform.position,
+            armour.position = Vector3.Lerp(armour.position, bodyPart.transform.position,
                 elapsedTime / flyTime);
-            armour.transform.rotation = Quaternion.Lerp(armour.transform.rotation, bodyPart.transform.rotation,
+            armour.rotation = Quaternion.Lerp(armour.rotation, bodyPart.transform.rotation,
                 elapsedTime / flyTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+    
+#if UNITY_EDITOR
+    [ContextMenu("Setup")]
+    void SetupPartsInsideRig() {
+        Undo.RecordObject(this, "setup");
+        armorParts = FindObjectsOfType<ArmourPart>();
+    }
+
+    [ContextMenu("RemoveRandomPart")]
+    public void RemoveRandomPartDebug() {
+        RemoveRandomBodyPart();
+    }
+#endif
+}
+
+struct ArmourAndArmourPlaceholder
+{
+    public Coroutine coroutine;
+    public BodyPart bodyPart;
+    public Transform ArmourPartTransform;
+
+    public ArmourAndArmourPlaceholder(BodyPart bodyPart, Transform armourPart, Coroutine coroutine)
+    {
+        this.bodyPart = bodyPart;
+        this.ArmourPartTransform = armourPart;
+        this.coroutine = coroutine;
     }
 }

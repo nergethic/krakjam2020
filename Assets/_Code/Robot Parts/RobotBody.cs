@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace _Code.Robot_Parts {
@@ -29,11 +30,17 @@ namespace _Code.Robot_Parts {
                     return (true, bodyPart);
             return (false, null);
         }
+
+        public BodyPart[] GetBodyParts() {
+            return bodyParts;
+        }
         
 #if UNITY_EDITOR
 
         [ContextMenu("Setup")]
         void SetupPartsInsideRig() {
+            Undo.RecordObject(this, "setup");
+            
             var namesToFind = new [] {"lowerArm", "head", "chest", "lowerleg"};
             var parts = new List<BodyPart>();
             foreach (var t in GetComponentsInChildren<Transform>()) {
@@ -46,7 +53,7 @@ namespace _Code.Robot_Parts {
         static void AddFromList(string[] namesToFind, Transform t, List<BodyPart> parts) {
             foreach (var nameToFind in namesToFind) {
                 if (t.name.ToLower().Contains(nameToFind.ToLower()) && !t.name.ToLower().Contains("end".ToLower()) && t.GetComponent<BodyPart>() == null) {
-                    UnityEditor.Undo.RecordObject(t, "BodyPart");
+                    Undo.RecordObject(t, "BodyPart");
                     Debug.Log($"Adding part to {t.name}");
                     parts.Add(t.gameObject.AddComponent<BodyPart>());
                 }

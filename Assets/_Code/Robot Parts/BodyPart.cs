@@ -1,11 +1,12 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace _Code.Robot_Parts {
     public class BodyPart : MonoBehaviour {
         [SerializeField] BodyType type;
         [SerializeField] BodySide side;
-        //ArmorPart placeholder;
+        public ArmourPart armourPart;
         
         bool isOccupied;
 
@@ -13,8 +14,18 @@ namespace _Code.Robot_Parts {
         public BodyType Type => type;
         public bool IsOccupied => isOccupied;
 
-        public void SetOccupied(bool value)
-        {
+        public void SetOccupied(bool value, ArmourPart part) {
+            if (isOccupied) {
+                armourPart.isAttached = value;
+                armourPart = null;
+            }
+
+            if (value) {
+                Assert.IsTrue(part != null);
+                armourPart = part;
+                armourPart.isAttached = true;
+            }
+            
             isOccupied = value;
         }
 
