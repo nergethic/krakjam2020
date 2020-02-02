@@ -77,8 +77,8 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
         }
         else {
             isShootButtonPressed = pad.xButton.wasPressedThisFrame;
-            shiftDown = pad.rightTrigger.isPressed;
             var leftStick = pad.leftStick.ReadValue();
+            shiftDown = leftStick.y > 0.8f;
 
             forwardKeyPressed = leftStick.y > MIN_STICK_TILT;
             backwardKeyPressed = leftStick.y < -MIN_STICK_TILT;

@@ -111,7 +111,7 @@ public class Island : MonoBehaviour, IWaitForStart {
 
             bundle.Add(r);
 
-            var t = positiveRandom ? 10 + Random.Range(0.5f, 1f) :  10 - Random.Range(0.5f, 1f);
+            var t = positiveRandom ? 2 + Random.Range(0.5f, 1f) :  2 - Random.Range(0.5f, 1f);
             positiveRandom = !positiveRandom;
             var itsaBreakTime = bundleTime > t;
             

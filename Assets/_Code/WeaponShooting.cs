@@ -30,7 +30,7 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
    }
 
    void CheckInput() {      
-       bool isInputPressed = playerController.PadAssigned ? playerController.Pad.yButton.wasPressedThisFrame : Mouse.current.leftButton.wasPressedThisFrame;
+       bool isInputPressed = playerController.PadAssigned ? playerController.Pad.rightTrigger.wasPressedThisFrame : Mouse.current.leftButton.wasPressedThisFrame;
        if (isInputPressed) {
            Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
            if (weapon == null || shootingBlocked)

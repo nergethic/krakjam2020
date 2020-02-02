@@ -12,7 +12,7 @@ public class DeadZone : MonoBehaviour
     {
         if (other.tag.Equals(playerTag))
         {startMenu.ShowWinOverlay(other.GetComponent<PlayerController>().PadIndex == 1);
-            Time.timeScale = 0;
+            Time.timeScale = 0.000001f;
             
         }
     }
