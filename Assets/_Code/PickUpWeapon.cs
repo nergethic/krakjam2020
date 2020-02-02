@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class PickUpWeapon : MonoBehaviour
 {
+    [SerializeField] Transform weaponPlaceInPlayer;
+    [SerializeField] string weaponTag="Weapon";
+    [SerializeField] PlayerController playerController;
 
-
-    [SerializeField] private Transform weaponPlaceInPlayer;
-    [SerializeField] private string weaponTag="Weapon";
-    [SerializeField] private PlayerController playerController;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag.Equals(weaponTag))
-        {
-         Weapon weaponScript=  other.GetComponent<Weapon>();
-         if (!weaponScript.isAttached)
-         {
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag.Equals(weaponTag)) {
+            Debug.Log("Enter");
+         Weapon weaponScript = other.GetComponent<Weapon>();
+         if (weaponScript != null && !weaponScript.isAttached) {
+             var rb = weaponScript.gameObject.GetComponent<Rigidbody>();
+             weaponScript.GetCollisionCollider().isTrigger = true;
+             rb.isKinematic = true;
              playerController.AnimateEquippingGun();
+             weaponScript.SetAttached(true);
              ParentWeaponToPlayer(weaponScript);
          }
         }
