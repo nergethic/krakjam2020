@@ -18,6 +18,8 @@ public class CatapultShoot : MonoBehaviour
     [SerializeField] private string playerTag;
     [SerializeField] private GameObject Popup;
     [SerializeField] private Transform cameraTransform;
+    [Range(0.0f, 10.0f)]
+    [SerializeField] private float percentOfTravelWhenStopAutoAim;
     public Vector3 middlePointOnCurve;
     private KeyCode launchKeycode=KeyCode.E;
     private bool isShooting = false;
@@ -116,7 +118,7 @@ public class CatapultShoot : MonoBehaviour
         var elapsedTime = 0f;
         while (elapsedTime < flyTime)
         {
-            if (elapsedTime < (flyTime * 9) / 10)
+            if (elapsedTime < (flyTime * percentOfTravelWhenStopAutoAim) / 10)
             {
                 rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
                     enemyPlayerTransform.position, middlePointOnCurve);
