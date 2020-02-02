@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class CatapultShoot : MonoBehaviour
 {  
+   
     [SerializeField] Vector3[] positions = new Vector3[50];
     [SerializeField] Transform rockStartTransform;
     [SerializeField]  float flyTime = 4.0f;
@@ -18,6 +19,8 @@ public class CatapultShoot : MonoBehaviour
     [SerializeField] private string playerTag;
     [SerializeField] private GameObject Popup;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] GameObject explosionParticle;
+    [SerializeField] GameObject shootParticle;
     [Range(0.0f, 10.0f)]
     [SerializeField] private float percentOfTravelWhenStopAutoAim;
     public Vector3 middlePointOnCurve;
@@ -28,16 +31,19 @@ public class CatapultShoot : MonoBehaviour
     private Coroutine cor;
     private bool canShoot=true;
     private int numPoints = 50;
-    private GameObject explosionParticle;
+   
+    
     
 
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals(playerTag))
+        var a = other.GetComponent<PlayerController>();
+        if (a!=null)
         {
-            if (Input.GetKeyDown(launchKeycode) && canShoot)
+            if (a.isShootButtonPressed && canShoot)
             {
+                PlayShootParticle();
                 AudioManager.audioManagerInstance.PlaySound("CannonShoot");
                 canShoot = false;
                 isShooting = true;
@@ -48,7 +54,7 @@ public class CatapultShoot : MonoBehaviour
                 }
                 else
                 {
-                    rockClone = Instantiate(rockPrefab, rockStartTransform.position, rockStartTransform.rotation);
+                    rockClone = Instantiate(rockPrefab, rockStartTransform.position, rockStartTransform.localRotation);
                 }
 
                 enemyPositionInShootMoment = enemyPlayerTransform.position;
@@ -59,6 +65,13 @@ public class CatapultShoot : MonoBehaviour
         
         
         
+    }
+
+    void PlayShootParticle()
+    {
+        GameObject explosionParticle = Instantiate(shootParticle, rockStartTransform.position,rockStartTransform.rotation);
+        explosionParticle.transform.parent = rockStartTransform.transform;
+        explosionParticle.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
@@ -137,8 +150,9 @@ public class CatapultShoot : MonoBehaviour
            
         }
         AudioManager.audioManagerInstance.PlaySound("CannonExplosion");
-        CheckDistanceToPlayer();
         PlayeExplosionParticle();
+        CheckDistanceToPlayer();
+        
         rockClone.SetActive(false);
         isShooting = false;
         canShoot = true;
@@ -174,7 +188,7 @@ public class CatapultShoot : MonoBehaviour
     void PlayeExplosionParticle()
     {
        
-       GameObject explosionParticle = Instantiate( rockClone.transform.GetChild(0).gameObject,rockClone.transform.position,rockClone.transform.rotation);
+       GameObject explosionParticle = Instantiate( this.explosionParticle,rockClone.transform.position,rockClone.transform.rotation);
         explosionParticle.SetActive(true);
     }
 }

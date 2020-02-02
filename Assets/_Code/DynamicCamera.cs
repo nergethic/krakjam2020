@@ -7,6 +7,7 @@ public class DynamicCamera : MonoBehaviour {
     [SerializeField] float rotationSpeed;
     [SerializeField] float backOffset;
     [SerializeField] float upOffset;
+    [SerializeField] float rightOffset;
     [SerializeField] AnimationCurve curve;
     [SerializeField] AnimationCurve deltaAngleToSpeedMultiplier;
     [SerializeField] AnimationCurve deltaTranslationToSpeedMultiplier;
@@ -61,6 +62,7 @@ public class DynamicCamera : MonoBehaviour {
     void Update() {
         if(!playerReached)
             return;
+
         var targetPosition = GetCameraTargetPosition();
         var dir = playerHead.position - targetPosition;
         var movSpeedMultiplier = deltaTranslationToSpeedMultiplier.Evaluate (dir.magnitude);
@@ -74,6 +76,7 @@ public class DynamicCamera : MonoBehaviour {
     Vector3 GetCameraTargetPosition() {
         if (playerIsDead)
             return player.position + Vector3.up * 10f;
-        return player.position - player.forward * backOffset + player.up * upOffset;
+        
+        return player.position - player.forward * backOffset + player.up * upOffset + player.right * rightOffset;
     }
 }
