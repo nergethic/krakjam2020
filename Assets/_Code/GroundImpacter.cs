@@ -43,10 +43,10 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         }
         Execute();
         yield return new WaitForSeconds (dynamicCamera.startPointLookDuration);
-        leftCamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
-        rightCamera.rect = new Rect(0.5f, 0f, 1f, 1f);
-        leftUICamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
-        rightUICamera.rect = new Rect(0.5f, 0f, 1f, 1f);
+        leftCamera.rect = new Rect(0.5f, 0f, 1f, 1f);
+        rightCamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
+        leftUICamera.rect = new Rect(0.5f, 0f, 1f, 1f);
+        rightUICamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
     }
     
     void Execute() {
