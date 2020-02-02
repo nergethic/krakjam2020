@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
         animator.applyRootMotion = true;
         animator.SetTrigger (DEATH_TRIGGER_NAME);
         dynamicCamera.EnableWastedPositioning();
-        StartMenu.ShowWinOverlay(padIndex == 0);
+        StartMenu.ShowWinOverlay(padIndex == 1);
     }
 
     Coroutine weightCor;
