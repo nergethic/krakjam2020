@@ -64,19 +64,19 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
    IEnumerator BlockShootingForSomeTime(Weapon weapon) {
        shootingBlocked = true;
        weapon.SetReloadLevel(0f);
-       yield return new WaitForSeconds(0.2f);
+       yield return new WaitForSeconds(0.1f);
        weapon.SetReloadLevel(0.2f);
        
        yield return new WaitForSeconds(0.2f);
        weapon.SetReloadLevel(0.4f);
        
-       yield return new WaitForSeconds(0.2f);
+       yield return new WaitForSeconds(0.3f);
        weapon.SetReloadLevel(0.6f);
        
-       yield return new WaitForSeconds(0.2f);
+       yield return new WaitForSeconds(0.4f);
        weapon.SetReloadLevel(0.8f);
        
-       yield return new WaitForSeconds(0.2f);
+       yield return new WaitForSeconds(0.5f);
        weapon.SetReloadLevel(1f);
        
        shootingBlocked = false;
