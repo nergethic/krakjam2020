@@ -38,6 +38,7 @@ public class CatapultShoot : MonoBehaviour
         {
             if (Input.GetKeyDown(launchKeycode) && canShoot)
             {
+                AudioManager.audioManagerInstance.PlaySound("CannonShoot");
                 canShoot = false;
                 isShooting = true;
                 if (rockClone != null)
@@ -135,6 +136,7 @@ public class CatapultShoot : MonoBehaviour
             yield return null;
            
         }
+        AudioManager.audioManagerInstance.PlaySound("CannonExplosion");
         CheckDistanceToPlayer();
         PlayeExplosionParticle();
         rockClone.SetActive(false);

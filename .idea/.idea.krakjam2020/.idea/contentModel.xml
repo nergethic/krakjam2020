@@ -21,6 +21,7 @@
           <e p="GrassSpawner.cs" t="Include" />
           <e p="GroundImpacter.cs" t="Include" />
           <e p="Island.cs" t="Include" />
+          <e p="MovmentSound.cs" t="Include" />
           <e p="PickUpWeapon.cs" t="Include" />
           <e p="PlayerArmour.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
