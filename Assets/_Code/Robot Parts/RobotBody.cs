@@ -54,7 +54,7 @@ namespace _Code.Robot_Parts {
 
         static void AddFromList(string[] namesToFind, Transform t, List<BodyPart> parts) {
             foreach (var nameToFind in namesToFind) {
-                if (t.name.ToLower().Contains(nameToFind.ToLower()) && !t.name.ToLower().Contains("end".ToLower()) && t.GetComponent<BodyPart>() == null) {
+                if (t.name.ToLower().Contains(nameToFind.ToLower()) && !t.name.ToLower().Contains("end".ToLower()) && !t.name.ToLower().Contains("target".ToLower()) && t.GetComponent<BodyPart>() == null) {
                     Undo.RecordObject(t, "BodyPart");
                     Debug.Log($"Adding part to {t.name}");
                     parts.Add(t.gameObject.AddComponent<BodyPart>());

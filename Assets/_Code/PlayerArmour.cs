@@ -9,8 +9,10 @@ using BodyPart = _Code.Robot_Parts.BodyPart;
 using Random = System.Random;
 
 
-public class PlayerArmour : MonoBehaviour
-{
+public class PlayerArmour : MonoBehaviour {
+    Action<bool> OnHit;
+    Vector3 SCALE_INCREASE_STEP = new Vector3(0.1f,0.1f,0.1f);
+    [SerializeField] PlayerController controller;
     [SerializeField] RobotBody robotBody;
     [SerializeField] float distanceWhenParent = 0.05f;
     [SerializeField] float flyTime = 1;
@@ -19,6 +21,7 @@ public class PlayerArmour : MonoBehaviour
     private string armourTag = "Armour";
     private Coroutine cor;
     private Random rnd = new Random();
+    bool dead;
     private void OnTriggerEnter(Collider other)
     {
         CheckIsTriggerEnterWithArmour(other);
@@ -26,22 +29,75 @@ public class PlayerArmour : MonoBehaviour
 
     private void Update()
     {
-        CheckIsArmourCloseToArmourPlace();
+        if(!dead)
+            CheckIsArmourCloseToArmourPlace();
     }
 
-    public void RemoveRandomBodyPart()
-    {
-        var randomParts = GetParts().OrderBy(x=>rnd.Next()).ToList();
-        for (int i = 0; i < randomParts.Count; i++)
-        {
-            var randomPart = randomParts[i];
-            if (i == 0)
-            {
-                StartCoroutine(EnablePhysicsAfterSomeTime(randomPart));
+    [ContextMenu("Hit")]
+    public void HandleHit() {
+        var parts = GetParts();
+        if (!parts.Any() || dead) {
+            return;
+        }
+        var randomParts = parts.OrderBy(x=>rnd.Next()).ToList();
+        if (randomParts.Count < 2) {
+            dead = true;
+            OnHit?.Invoke (true);
+            controller?.PlayDeathAnimation();
+        }
+        else
+            robotBody.transform.localScale -= SCALE_INCREASE_STEP;
+        OnHit?.Invoke (false);
+        controller?.PlayHitAnimation();
+        if (!randomParts.Any())
+            return;
+        var firstRandomPart = randomParts[0];
+        LerpArmourAwayAndBack(randomParts);
+        StartCoroutine(EnablePhysicsAfterSomeTime(firstRandomPart));
+        randomParts.Remove (firstRandomPart);
+    }
+
+    #region Armour animation on hit
+
+    Coroutine partLerpCor;
+    void LerpArmourAwayAndBack(IEnumerable<ArmourPart> parts) {
+        RestorePartsLocalPos (parts);
+        if(partLerpCor != null)
+            StopCoroutine (partLerpCor);
+        partLerpCor = StartCoroutine (LerpArmourAwayAndBackCor (parts));
+    }
+
+    IEnumerator LerpArmourAwayAndBackCor(IEnumerable<ArmourPart> parts) {
+        var progress = 0f;
+        while (progress < 1f) {
+            foreach (var armourPart in parts) {
+                armourPart.transform.position += GetDirectionOut(armourPart.transform) * Time.deltaTime * UnityEngine.Random.Range(0.75f, 1.25f);
             }
-            else {
-                //LerpArmourAwayAndBack();
+            progress += Time.deltaTime*8f;
+            yield return null;
+        }
+        progress = 0f;
+        while (progress < 1f) {
+            foreach (var armourPart in parts) {
+                if(armourPart.transform.parent != null)
+                    armourPart.transform.position = Vector3.Lerp (armourPart.transform.position, armourPart.transform.parent.position, progress);
             }
+            progress += Time.deltaTime;
+            yield return null;
+        }
+
+        RestorePartsLocalPos (parts);
+    }
+
+    Vector3 GetDirectionOut(Transform part) {
+        var dir = part.transform.position - (robotBody.transform.position + Vector3.up*0.5f);
+        dir.y = 0;
+        return dir;
+    }
+
+    void RestorePartsLocalPos(IEnumerable<ArmourPart> parts) {
+        foreach (var armourPart in parts) {
+            armourPart.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -55,7 +111,8 @@ public class PlayerArmour : MonoBehaviour
     bool DoesPartBelongToThisPlayer(ArmourPart part) {
         return part.isAttached && part.player1 == robotBody.player1;
     }
-
+    #endregion
+    
     IEnumerator EnablePhysicsAfterSomeTime(ArmourPart part) {
         foreach (var bodySocket in robotBody.GetBodyParts()) {
             if (bodySocket.IsOccupied && bodySocket.armourPart == part) {
@@ -79,7 +136,7 @@ public class PlayerArmour : MonoBehaviour
         }
         
         rb.isKinematic = false;
-        rb.AddForce(-transform.forward*8f, ForceMode.Impulse);
+        rb.AddForce (GetDirectionOut(part.transform).normalized*8f, ForceMode.Impulse);
         rb.useGravity = true;
         var child = part.transform.GetChild(0);
         child.gameObject.SetActive(true);
@@ -122,6 +179,7 @@ public class PlayerArmour : MonoBehaviour
 
             if (exists) {
                 armorSocket.SetOccupied(true, armorPart);
+                robotBody.transform.localScale += SCALE_INCREASE_STEP;
                 Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.transform, armorSocket));
                 var structItem = new ArmourAndArmourPlaceholder(armorSocket, other.transform, cor);
                 structList.Add(structItem);
@@ -158,7 +216,7 @@ public class PlayerArmour : MonoBehaviour
 
     [ContextMenu("RemoveRandomPart")]
     public void RemoveRandomPartDebug() {
-        RemoveRandomBodyPart();
+        HandleHit();
     }
 #endif
 }
