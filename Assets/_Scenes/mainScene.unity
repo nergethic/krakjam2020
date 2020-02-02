@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.11268882, g: 0.28156924, b: 0.7091791, a: 1}
+  m_IndirectSpecularColor: {r: 0.11265369, g: 0.2815433, b: 0.7091857, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2626,6 +2626,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1043888698}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1082778675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2142465414058159491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+    type: 3}
+  m_PrefabInstance: {fileID: 1764271873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1092772428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2776,36 +2782,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1110093296}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1119429680
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1119429681}
-  m_Layer: 0
-  m_Name: RockStartTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1119429681
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119429680}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.024, y: -0.146, z: 3.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8894946526931457333}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1194044205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3550,11 +3526,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9095246608783195981, guid: e9b9af234d8b54c408c43b9bc0257057,
-        type: 3}
-      propertyPath: dynamicCamera
-      value: 
-      objectReference: {fileID: 40965364}
     - target: {fileID: 1777658045399795276, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3610,6 +3581,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9095246608783195981, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: dynamicCamera
+      value: 
+      objectReference: {fileID: 40965364}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9b9af234d8b54c408c43b9bc0257057, type: 3}
 --- !u!4 &1545445395 stripped
@@ -3751,36 +3727,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &1653154514
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1653154515}
-  m_Layer: 0
-  m_Name: RockStartTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1653154515
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653154514}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.033, y: -0.014, z: 3.869}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1764271875}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1656696078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1096388630160251107, guid: e7484a58ae942514495b53acfc473186,
@@ -3997,6 +3943,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7606006757358672310}
     m_Modifications:
+    - target: {fileID: 2142465414058159491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: enemyPlayerTransform
+      value: 
+      objectReference: {fileID: 1656696078}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1291742749}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: Popup
+      value: 
+      objectReference: {fileID: 1082778675}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: percentOfTravelWhenStopAutoAim
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: distanceToGiveDMG
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 398173005464950800, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
         type: 3}
       propertyPath: m_Name
@@ -4130,106 +4106,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1764271873}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1764271875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 398173005465122418, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-    type: 3}
-  m_PrefabInstance: {fileID: 1764271873}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1764271876 stripped
+--- !u!1 &1777994602 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 398173005464950800, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+  m_CorrespondingSourceObject: {fileID: 2142465414058159491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
     type: 3}
-  m_PrefabInstance: {fileID: 1764271873}
+  m_PrefabInstance: {fileID: 9148968634830152519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1764271877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764271876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f6a61a4002f7249a28a3d9810ef5c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  rockStartTransform: {fileID: 1653154515}
-  flyTime: 2
-  distanceToGiveDMG: 2
-  enemyPlayerTransform: {fileID: 1656696078}
-  rockPrefab: {fileID: 8787673453508447163, guid: 71113f51d8ea7d5448372f27ca310e5c,
-    type: 3}
-  drawGizmos: 0
-  playerTag: Player
-  Popup: {fileID: 0}
-  cameraTransform: {fileID: 1291742749}
-  percentOfTravelWhenStopAutoAim: 0
-  middlePointOnCurve: {x: 10, y: 20, z: 0}
---- !u!135 &1764271878
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764271876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 8
-  m_Center: {x: 0, y: 15.27, z: 0}
 --- !u!1001 &1788110052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36030,99 +35912,12 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!4 &8894946526931457333 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 398173005465122418, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-    type: 3}
-  m_PrefabInstance: {fileID: 9148968634830152519}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8894946526931529973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 398173005465047986, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
     type: 3}
   m_PrefabInstance: {fileID: 9148968634830152519}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8894946526931893079 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 398173005464950800, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-    type: 3}
-  m_PrefabInstance: {fileID: 9148968634830152519}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8894946526931893080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8894946526931893079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f6a61a4002f7249a28a3d9810ef5c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  rockStartTransform: {fileID: 1119429681}
-  flyTime: 2
-  distanceToGiveDMG: 2
-  enemyPlayerTransform: {fileID: 1545445395}
-  rockPrefab: {fileID: 8787673453508447163, guid: 71113f51d8ea7d5448372f27ca310e5c,
-    type: 3}
-  drawGizmos: 0
-  playerTag: Player
-  Popup: {fileID: 0}
-  cameraTransform: {fileID: 1626763316}
-  percentOfTravelWhenStopAutoAim: 0
-  middlePointOnCurve: {x: 10, y: 20, z: 0}
 --- !u!23 &8918143208947384259
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -37003,6 +36798,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7606006756269242404}
     m_Modifications:
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: percentOfTravelWhenStopAutoAim
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: Popup
+      value: 
+      objectReference: {fileID: 1777994602}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1626763316}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: enemyPlayerTransform
+      value: 
+      objectReference: {fileID: 1545445395}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: distanceToGiveDMG
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237477177945043359, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 398173005464950800, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
         type: 3}
       propertyPath: m_Name
