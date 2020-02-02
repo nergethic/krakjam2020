@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
+using _Code;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, IWaitForStart {
     [SerializeField] int padIndex = 0;
     public bool isShootButtonPressed;
     public DynamicCamera dynamicCamera;
@@ -172,6 +173,7 @@ public class PlayerController : MonoBehaviour {
         animator.applyRootMotion = true;
         animator.SetTrigger (DEATH_TRIGGER_NAME);
         dynamicCamera.EnableWastedPositioning();
+        StartMenu.ShowWinOverlay(padIndex == 0);
     }
 
     Coroutine weightCor;
@@ -197,4 +199,7 @@ public class PlayerController : MonoBehaviour {
     bool Approximately(float a, float b, float tolerance) {
         return Mathf.Abs(a - b) < tolerance;
     }
+
+    public bool Ready { get; set; }
+    public StartMenu StartMenu { get; set; }
 }
