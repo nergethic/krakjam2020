@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.11265369, g: 0.2815433, b: 0.7091857, a: 1}
+  m_IndirectSpecularColor: {r: 0.11269094, g: 0.2815719, b: 0.7091785, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -768,8 +768,13 @@ MonoBehaviour:
   player1: {fileID: 1545445395}
   island2: {fileID: 1284998372}
   player2: {fileID: 1656696078}
-  fallParticles: []
-  impactParticles: []
+  fallParticles:
+  - {fileID: 1701416406273110949}
+  impactParticles:
+  - {fileID: 1701416406273110948}
+  - {fileID: 1701416406273110947}
+  - {fileID: 1545445398}
+  - {fileID: 1545445397}
 --- !u!4 &419489614
 Transform:
   m_ObjectHideFlags: 0
@@ -2968,8 +2973,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 626c8151036b3a44e8cb4a81661f2d97, type: 2}
   - {fileID: 11400000, guid: 26ce82aea1be93d43bbe676be0ae2813, type: 2}
   - {fileID: 11400000, guid: e3b72cb574a0cf34cb74aca2a57edcd0, type: 2}
-  - {fileID: 11400000, guid: 75bc97224c284c14884d378e4ac10c12, type: 2}
-  - {fileID: 11400000, guid: 29e782d65164f9140b0e260a67163fc4, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1028943662
 Transform:
   m_ObjectHideFlags: 0
@@ -4244,11 +4249,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2830584345834553183, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: m_Name
+      value: airSmoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014279335981116272, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: m_Name
+      value: airSmoke
+      objectReference: {fileID: 0}
     - target: {fileID: 8558367624088499463, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 2134388336}
+    - target: {fileID: 8558367624088499463, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 759020662}
     - target: {fileID: 1759571507, guid: e9b9af234d8b54c408c43b9bc0257057, type: 3}
       propertyPath: armorParts.Array.data[0]
       value: 
@@ -4323,6 +4343,18 @@ Transform:
 --- !u!4 &1545445396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2874283276667815778, guid: e9b9af234d8b54c408c43b9bc0257057,
+    type: 3}
+  m_PrefabInstance: {fileID: 1545445394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1545445397 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3099798330067617747, guid: e9b9af234d8b54c408c43b9bc0257057,
+    type: 3}
+  m_PrefabInstance: {fileID: 1545445394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1545445398 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5242925589464110667, guid: e9b9af234d8b54c408c43b9bc0257057,
     type: 3}
   m_PrefabInstance: {fileID: 1545445394}
   m_PrefabAsset: {fileID: 0}
@@ -4767,53 +4799,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower_defence (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2142465414058159491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: enemyPlayerTransform
-      value: 
-      objectReference: {fileID: 1656696078}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: cameraTransform
-      value: 
-      objectReference: {fileID: 1291742749}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: Popup
-      value: 
-      objectReference: {fileID: 1082778675}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: percentOfTravelWhenStopAutoAim
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: distanceToGiveDMG
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: explosionParticle
-      value: 
-      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
-        type: 3}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: shootParticle
-      value: 
-      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
-        type: 3}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: cameraShaker
-      value: 
-      objectReference: {fileID: 2134388335}
     - target: {fileID: 398173005465047986, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4933,6 +4918,53 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.522
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: enemyPlayerTransform
+      value: 
+      objectReference: {fileID: 1656696078}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1291742749}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: Popup
+      value: 
+      objectReference: {fileID: 1082778675}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: percentOfTravelWhenStopAutoAim
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: distanceToGiveDMG
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: explosionParticle
+      value: 
+      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
+        type: 3}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: shootParticle
+      value: 
+      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
+        type: 3}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: cameraShaker
+      value: 
+      objectReference: {fileID: 2134388335}
+    - target: {fileID: 2142465414058159491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef41ca35a9b51f49a8ab7693b89a818, type: 3}
@@ -11622,6 +11654,16 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: aa75cbe89a5c9af4e8c6015dec8824a5, type: 2}
+    - target: {fileID: 3518688188324307440, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_Name
+      value: airSmoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 894119930159527391, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_Name
+      value: airSmoke
+      objectReference: {fileID: 0}
     - target: {fileID: 7409158209317769030, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -11657,6 +11699,11 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 891206490}
+    - target: {fileID: 7014861327775476648, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 179892915}
     - target: {fileID: 1701416406101389468, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
       propertyPath: armorParts.Array.size
@@ -11749,6 +11796,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7484a58ae942514495b53acfc473186, type: 3}
+--- !u!198 &1701416406273110947 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4366265252046084476, guid: e7484a58ae942514495b53acfc473186,
+    type: 3}
+  m_PrefabInstance: {fileID: 1701416406273110946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1701416406273110948 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6871991924706855140, guid: e7484a58ae942514495b53acfc473186,
+    type: 3}
+  m_PrefabInstance: {fileID: 1701416406273110946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1701416406273110949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6295759021395746529, guid: e7484a58ae942514495b53acfc473186,
+    type: 3}
+  m_PrefabInstance: {fileID: 1701416406273110946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &1714334615706496642
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -38812,48 +38877,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower_defence
       objectReference: {fileID: 0}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: percentOfTravelWhenStopAutoAim
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: Popup
-      value: 
-      objectReference: {fileID: 1777994602}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: cameraTransform
-      value: 
-      objectReference: {fileID: 1626763316}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: enemyPlayerTransform
-      value: 
-      objectReference: {fileID: 1545445395}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: distanceToGiveDMG
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: explosionParticle
-      value: 
-      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
-        type: 3}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: shootParticle
-      value: 
-      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
-        type: 3}
-    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
-        type: 3}
-      propertyPath: cameraShaker
-      value: 
-      objectReference: {fileID: 891206489}
     - target: {fileID: 398173005465047986, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -38959,6 +38982,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -1.121
       objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: percentOfTravelWhenStopAutoAim
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: Popup
+      value: 
+      objectReference: {fileID: 1777994602}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1626763316}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: enemyPlayerTransform
+      value: 
+      objectReference: {fileID: 1545445395}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: distanceToGiveDMG
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: explosionParticle
+      value: 
+      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
+        type: 3}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: shootParticle
+      value: 
+      objectReference: {fileID: 7243590934370437728, guid: 1eebe275ef48f6f4f8b576bbdacf6255,
+        type: 3}
+    - target: {fileID: 4270299620155779491, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
+        type: 3}
+      propertyPath: cameraShaker
+      value: 
+      objectReference: {fileID: 891206489}
     - target: {fileID: 5237477177945043359, guid: 4ef41ca35a9b51f49a8ab7693b89a818,
         type: 3}
       propertyPath: m_RootOrder
