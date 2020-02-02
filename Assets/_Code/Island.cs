@@ -114,7 +114,8 @@ public class Island : MonoBehaviour, IWaitForStart {
                 if (shaker != null)
                     shaker.ShakeOnce(1.9f, 0.57f, 0.1f, 0.3f);
                 yield return new WaitForSeconds(0.8f);
-                StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.3f);
+                if(StartMenu != null)
+                    StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.3f);
                 bundleTime = 0f;
                 bundle.Clear();
             }

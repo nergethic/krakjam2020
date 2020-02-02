@@ -33,7 +33,8 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         while (player1.position.y > groundPoint.position.y)
             yield return null;
         OnGroundHit?.Invoke();
-        StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.4f);
+        if(StartMenu != null)
+            StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.4f);
         foreach (var fallParticle in fallParticles) {
             fallParticle.SetActive (false);
         }

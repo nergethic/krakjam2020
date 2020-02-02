@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     bool equippingGun;
     bool inputBlocked = true;
     bool dead;
+    bool padAssigned;
 
     void Awake() {
         transform = gameObject.transform;
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour {
             Debug.LogError($"Pad by index {padIndex} is not connected");
             return;
         }
+
+        padAssigned = true;
         pad = pads[padIndex];
     }
 
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour {
         bool rightKeyPressed;
         bool jumpPressed;
 
-        if (pad == null) {
+        if (!padAssigned) {
             shiftDown = Input.GetKey (KeyCode.LeftShift);
             forwardKeyPressed = Input.GetKey (KeyCode.W);
             backwardKeyPressed = Input.GetKey (KeyCode.S);

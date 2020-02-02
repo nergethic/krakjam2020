@@ -52,18 +52,22 @@ namespace _Code {
         void Update() {
             if(ready)
                 return;
-            if (primaryGamepad != null && primaryGamepad.aButton.isPressed) {
+            if (primaryGamepad != null && primaryGamepad.aButton.wasPressedThisFrame) {
                 primaryPopup.StopFading();
                 primaryPlayerReady = true;
                 TriggerPrimaryPadVibration(0.7f, 1f, READY_VIBRATION_TIME);
             }
-            if (secondaryGamepad != null && secondaryGamepad.aButton.isPressed) {
+            if (secondaryGamepad != null && secondaryGamepad.aButton.wasPressedThisFrame) {
                 secondaryPopup.StopFading();
                 secondaryPlayerReady = true;
                 TriggerSecondaryPadVibration(0.7f, 1f, READY_VIBRATION_TIME);
             }
 
-            if (primaryPlayerReady)//  && secondaryPlayerReady)
+            if(!Gamepad.all.Any() && Keyboard.current.spaceKey.wasPressedThisFrame)
+                Invoke(nameof(SetReady), 1f);
+            else if(Gamepad.all.Any() && Gamepad.all.Count == 0 && primaryGamepad.aButton.wasPressedThisFrame)
+                Invoke(nameof(SetReady), 1f);
+            if (primaryPlayerReady && secondaryPlayerReady)
                 Invoke(nameof(SetReady), 1f);
         }
 
@@ -105,7 +109,7 @@ namespace _Code {
             secondaryGamepad.ResetHaptics();
         }
 
-        public void TriggerIslandBreakVibration() {
+        public void TriggerIslandBreakVibration(Transform islandPart) {
             
         }
         
