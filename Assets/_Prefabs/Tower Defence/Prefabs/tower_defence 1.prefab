@@ -90,6 +90,9 @@ GameObject:
   - component: {fileID: 398173005465122418}
   - component: {fileID: 398173005463777322}
   - component: {fileID: 398173005463080874}
+  - component: {fileID: 384593234982038181}
+  - component: {fileID: 7910858892118721888}
+  - component: {fileID: 4092273756861063809}
   m_Layer: 0
   m_Name: cannon
   m_TagString: Untagged
@@ -157,6 +160,45 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &384593234982038181
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398173005464783522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2867787, y: 3.0955784, z: 6.030893}
+  m_Center: {x: 0.06399616, y: -0.011505483, z: 1.0810143}
+--- !u!65 &7910858892118721888
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398173005464783522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.509313, y: 0.739261, z: 6.171535}
+  m_Center: {x: 0.028137682, y: -1.9600916, z: -0.032590874}
+--- !u!65 &4092273756861063809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398173005464783522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.3420715, y: 0.6276944, z: 3.1100085}
+  m_Center: {x: -0.04228019, y: -1.9266343, z: -0.22840892}
 --- !u!1 &398173005464950800
 GameObject:
   m_ObjectHideFlags: 0
