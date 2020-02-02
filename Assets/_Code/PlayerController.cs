@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float rotationSpeed;
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
+    [SerializeField] ParticleSystem[] runDustParticles;
     const string MOVEMENT_BLEND = "Speed";
     const string DEATH_TRIGGER_NAME = "Death";
     const float AIM_WEIGHT_CHANGE_SPEED = 5f;
@@ -87,14 +88,26 @@ public class PlayerController : MonoBehaviour {
 
         if (forwardKeyPressed) {
             animator.SetFloat (MOVEMENT_BLEND, shiftDown ? 2 : 1);
+            if(shiftDown){
+                foreach (var runDustParticle in runDustParticles) {
+                    if (!runDustParticle.isEmitting)
+                        runDustParticle.Play();
+                }
+            }
             transform.position += transform.forward * (shiftDown ? runSpeed : walkSpeed);
         }
         else if (backwardKeyPressed) {
             animator.SetFloat (MOVEMENT_BLEND, -1);
             transform.position -= transform.forward * walkSpeed / 2f;
+            foreach (var runDustParticle in runDustParticles) {
+                runDustParticle.Stop();
+            }
         }
         else {
             animator.SetFloat (MOVEMENT_BLEND, 0);
+            foreach (var runDustParticle in runDustParticles) {
+                runDustParticle.Stop();
+            }
         }
 
         if (jumpPressed && Time.time > timeOfLastJump + JUMP_COOLDOWN) {
@@ -104,11 +117,11 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (leftKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND, shiftDown ? 2 : 1);
+            animator.SetFloat (MOVEMENT_BLEND, shiftDown && forwardKeyPressed ? 2 : 1);
             transform.Rotate (0, -rotationSpeed, 0);
         }
         else if (rightKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND,  shiftDown ? 2 : 1);
+            animator.SetFloat (MOVEMENT_BLEND, shiftDown && forwardKeyPressed ? 2 : 1);
             transform.Rotate (0, rotationSpeed, 0);
         }
     }
