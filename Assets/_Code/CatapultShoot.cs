@@ -38,9 +38,10 @@ public class CatapultShoot : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals(playerTag))
+        var a = other.GetComponent<PlayerController>();
+        if (a!=null)
         {
-            if (Input.GetKeyDown(launchKeycode) && canShoot)
+            if (a.isShootButtonPressed && canShoot)
             {
                 PlayShootParticle();
                 AudioManager.audioManagerInstance.PlaySound("CannonShoot");
