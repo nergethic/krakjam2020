@@ -54,8 +54,6 @@ public class PlayerController : MonoBehaviour {
         if (inputBlocked)
             return;
 
-        isShootButtonPressed = pad.xButton.wasPressedThisFrame;
-        
         bool shiftDown;
         bool forwardKeyPressed;
         bool backwardKeyPressed;
@@ -72,6 +70,7 @@ public class PlayerController : MonoBehaviour {
             jumpPressed = Keyboard.current.spaceKey.isPressed;
         }
         else {
+            isShootButtonPressed = pad.xButton.wasPressedThisFrame;
             shiftDown = pad.leftTrigger.isPressed;
             var leftStick = pad.leftStick.ReadValue();
 
