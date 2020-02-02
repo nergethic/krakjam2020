@@ -9,7 +9,7 @@ namespace _Code.Robot_Parts {
        public bool player1;
        public Transform body;
         [SerializeField] BodyPart[] bodyParts;
-        List<BodyPart.BodyType> centerBodyTypes = new List<BodyPart.BodyType> {BodyPart.BodyType.Chest, BodyPart.BodyType.Helm, BodyPart.BodyType.Leg};
+        List<BodyPart.BodyType> centerBodyTypes = new List<BodyPart.BodyType> {BodyPart.BodyType.Chest, BodyPart.BodyType.Helm};
 
         public (bool, BodyPart) GetBodyPart(BodyPart.BodyType type) {
             foreach (var bodyPart in bodyParts) {
