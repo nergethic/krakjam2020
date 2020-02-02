@@ -31,21 +31,19 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
 
    void CheckInput() {
        if (Mouse.current.leftButton.wasPressedThisFrame || playerController.Pad.yButton.wasPressedThisFrame) {
-           if (shootingBlocked) {
+           Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
+           if (weapon == null || shootingBlocked)
                return;
-           } else {
-               if (shootingBlockedCor != null) {
-                   StopCoroutine(shootingBlockedCor);
-                   shootingBlockedCor = null;
-               }
-               shootingBlockedCor = StartCoroutine(BlockShootingForSomeTime());
+
+           if (shootingBlockedCor != null) {
+               StopCoroutine(shootingBlockedCor);
+               shootingBlockedCor = null;
            }
+           shootingBlockedCor = StartCoroutine(BlockShootingForSomeTime(weapon));
            
-            Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
-            if (weapon != null) {
-                CastRaycast(weapon);
-                ResetLaserFx(weapon.laser);
-            }
+           
+            CastRaycast(weapon);
+            ResetLaserFx(weapon.laser);
        }
     }
 
@@ -62,9 +60,24 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
        r.enabled = false;
    }
    
-   IEnumerator BlockShootingForSomeTime() {
+   IEnumerator BlockShootingForSomeTime(Weapon weapon) {
        shootingBlocked = true;
-       yield return new WaitForSeconds(1f);
+       weapon.SetReloadLevel(0f);
+       yield return new WaitForSeconds(0.2f);
+       weapon.SetReloadLevel(0.2f);
+       
+       yield return new WaitForSeconds(0.2f);
+       weapon.SetReloadLevel(0.4f);
+       
+       yield return new WaitForSeconds(0.2f);
+       weapon.SetReloadLevel(0.6f);
+       
+       yield return new WaitForSeconds(0.2f);
+       weapon.SetReloadLevel(0.8f);
+       
+       yield return new WaitForSeconds(0.2f);
+       weapon.SetReloadLevel(1f);
+       
        shootingBlocked = false;
    }
 
