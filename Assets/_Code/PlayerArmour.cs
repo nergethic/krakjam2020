@@ -17,6 +17,7 @@ public class PlayerArmour : MonoBehaviour {
     [SerializeField] float distanceWhenParent = 0.05f;
     [SerializeField] float flyTime = 1;
     [SerializeField] ArmourPart[] armorParts;
+    [SerializeField] ParticleSystem[] repairParticles;
     private List<ArmourAndArmourPlaceholder> structList = new List<ArmourAndArmourPlaceholder>();
     private string armourTag = "Armour";
     private Coroutine cor;
@@ -44,11 +45,11 @@ public class PlayerArmour : MonoBehaviour {
         }
 
         var parts = GetParts();
-        if (!parts.Any() || dead) {
+        if (dead) {
             return;
         }
         var randomParts = parts.OrderBy(x=>rnd.Next()).ToList();
-        if (randomParts.Count < 2) {
+        if (!parts.Any() || randomParts.Count < 2) {
             dead = true;
             OnHit?.Invoke (true);
             controller?.PlayDeathAnimation();
@@ -150,7 +151,7 @@ public class PlayerArmour : MonoBehaviour {
         }
         
         rb.isKinematic = false;
-        rb.AddForce (GetDirectionOut(part.transform).normalized*8f, ForceMode.Impulse);
+        rb.AddForce (GetDirectionOut(part.transform).normalized*15f, ForceMode.Impulse);
         rb.useGravity = true;
         part.GetComponent<MeshCollider>().enabled = true;
     }
@@ -172,6 +173,9 @@ public class PlayerArmour : MonoBehaviour {
                     armourPartTransform.rotation = bodyPart.transform.rotation;
                     armourPartTransform.parent = bodyPart.gameObject.transform;
                     var armourPart = armourPartTransform.GetComponent<ArmourPart>();
+                    foreach (var repairParticle in repairParticles) {
+                        repairParticle.Play();
+                    }
                     armourPart.isAttached = true;
                     armourPart.player1 = robotBody.player1;
                     if (structList[i].coroutine != null)

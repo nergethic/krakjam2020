@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
     bool padAssigned;
 
     public int PadIndex => padIndex;
+    public bool PadAssigned => padAssigned;
     public Gamepad Pad => pad;
 
     void Awake() {

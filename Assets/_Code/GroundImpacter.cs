@@ -17,7 +17,7 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
     [SerializeField] Transform player1;
     [SerializeField] Island island2;
     [SerializeField] Transform player2;
-    [SerializeField] GameObject[] fallParticles;
+    [SerializeField] ParticleSystem[] fallParticles;
     [SerializeField] ParticleSystem[] impactParticles;
 
     public bool Ready { get; set; }
@@ -28,7 +28,7 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         while (!Ready)
             yield return null;
         foreach (var fallParticle in fallParticles) {
-            fallParticle.SetActive (true);
+            fallParticle.Play();
         }
         while (player1.position.y > groundPoint.position.y)
             yield return null;
@@ -36,7 +36,7 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         if(StartMenu != null)
             StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.4f);
         foreach (var fallParticle in fallParticles) {
-            fallParticle.SetActive (false);
+            fallParticle.Stop();
         }
         foreach (var impactParticle in impactParticles) {
             impactParticle.Play();
