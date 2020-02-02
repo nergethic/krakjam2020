@@ -11,6 +11,7 @@ using Random = System.Random;
 
 public class PlayerArmour : MonoBehaviour {
     Action<bool> OnHit;
+    [SerializeField] private GameObject hitParticle;
     [SerializeField] PlayerController controller;
     [SerializeField] RobotBody robotBody;
     [SerializeField] float distanceWhenParent = 0.05f;
@@ -21,6 +22,7 @@ public class PlayerArmour : MonoBehaviour {
     private Coroutine cor;
     private Random rnd = new Random();
     bool dead;
+    private bool canPlayParticle = true;
     private void OnTriggerEnter(Collider other)
     {
         CheckIsTriggerEnterWithArmour(other);
@@ -34,6 +36,13 @@ public class PlayerArmour : MonoBehaviour {
 
     [ContextMenu("Hit")]
     public void HandleHit() {
+        hitParticle.SetActive(true);
+        if (canPlayParticle)
+        {
+            StartCoroutine(SetParticleOff());
+            canPlayParticle = false;
+        }
+
         var parts = GetParts();
         if (!parts.Any() || dead) {
             return;
@@ -55,6 +64,13 @@ public class PlayerArmour : MonoBehaviour {
         LerpArmourAwayAndBack(randomParts);
     }
 
+    IEnumerator SetParticleOff()
+    {
+        yield return new WaitForSeconds(2.5f);
+        hitParticle.SetActive(false);
+        canPlayParticle = true;
+    }
+    
     #region Armour animation on hit
 
     Coroutine partLerpCor;
@@ -161,6 +177,7 @@ public class PlayerArmour : MonoBehaviour {
                     if (structList[i].coroutine != null)
                         StopCoroutine(structList[i].coroutine);
                     structList.Remove(structList[i]);
+                    
                 }
             }
         }
@@ -179,6 +196,7 @@ public class PlayerArmour : MonoBehaviour {
                 Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.transform, armorSocket));
                 var structItem = new ArmourAndArmourPlaceholder(armorSocket, other.transform, cor);
                 structList.Add(structItem);
+                AudioManager.audioManagerInstance.PlaySound("Repair");
             }
         }
     }

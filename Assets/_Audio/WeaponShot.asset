@@ -15,5 +15,7 @@ MonoBehaviour:
   name: WeaponShot
   clip: {fileID: 8300000, guid: b544271a0a55b8a438e26428bed930d8, type: 3}
   volume: 1
+  mixerGroup: {fileID: 3382516704510703048, guid: 8eff115c7df8df042ae6296b4eb227e7,
+    type: 2}
   pitch: 1
   source: {fileID: 0}

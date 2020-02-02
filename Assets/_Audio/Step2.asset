@@ -15,5 +15,7 @@ MonoBehaviour:
   name: step2
   clip: {fileID: 8300000, guid: 2d9f7e78895984040ad4fb1262c826cc, type: 3}
   volume: 1
-  pitch: 1
+  mixerGroup: {fileID: -8612680042361950272, guid: 8eff115c7df8df042ae6296b4eb227e7,
+    type: 2}
+  pitch: 1.1884584
   source: {fileID: 0}

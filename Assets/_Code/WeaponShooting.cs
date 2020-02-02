@@ -10,10 +10,14 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
     [SerializeField] int shootButton;
     [SerializeField] string enemyPlayerTag;
     [SerializeField] Transform camera;
+    [SerializeField] PlayerController playerController;
+    bool shootingBlocked = false;
 
-   
-   Coroutine shootFxCor;
-   int layerMask;
+    Coroutine shootingBlockedCor;
+    Coroutine shootFxCor;
+    int layerMask;
+
+    private float waitTime = 0f;
   // [SerializeField] private PlayerController playerController;
    private void Start()
    {
@@ -26,7 +30,17 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
    }
 
    void CheckInput() {
-       if (Mouse.current.leftButton.wasPressedThisFrame) {
+       if (Mouse.current.leftButton.wasPressedThisFrame || playerController.Pad.yButton.wasPressedThisFrame) {
+           if (shootingBlocked) {
+               return;
+           } else {
+               if (shootingBlockedCor != null) {
+                   StopCoroutine(shootingBlockedCor);
+                   shootingBlockedCor = null;
+               }
+               shootingBlockedCor = StartCoroutine(BlockShootingForSomeTime());
+           }
+           
             Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
             if (weapon != null) {
                 CastRaycast(weapon);
@@ -46,6 +60,12 @@ public class WeaponShooting : MonoBehaviour, IWaitForStart {
        r.enabled = true;
        yield return new WaitForSeconds(0.15f);
        r.enabled = false;
+   }
+   
+   IEnumerator BlockShootingForSomeTime() {
+       shootingBlocked = true;
+       yield return new WaitForSeconds(1f);
+       shootingBlocked = false;
    }
 
     void CastRaycast(Weapon weapon) {

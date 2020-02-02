@@ -15,5 +15,7 @@ MonoBehaviour:
   name: CannonShoot
   clip: {fileID: 8300000, guid: c65a788b31bd7754581298dad56ed191, type: 3}
   volume: 0.65
+  mixerGroup: {fileID: 3382516704510703048, guid: 8eff115c7df8df042ae6296b4eb227e7,
+    type: 2}
   pitch: 1
   source: {fileID: 0}
