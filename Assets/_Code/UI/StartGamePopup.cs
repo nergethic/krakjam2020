@@ -10,14 +10,22 @@ namespace _Code.UI {
         [SerializeField] Image image;
         [SerializeField] AnimationCurve fadingCurve;
 
+        Coroutine fadingCoroutine;
+
         [ContextMenu("Start")]
         public void StartFading() {
-            StartCoroutine(FadingCoroutine());
+            fadingCoroutine = StartCoroutine(FadingCoroutine());
         }
 
         [ContextMenu("Stop")]
         public void StopFading() {
-            StopCoroutine(FadingCoroutine());
+            if(fadingCoroutine != null)
+                StopCoroutine(FadingCoroutine());
+        }
+
+        public void SetActive(bool value) {
+            gameObject.SetActive(value);
+            StopFading();
         }
 
         IEnumerator FadingCoroutine() {

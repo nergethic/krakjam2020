@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
+using _Code;
 using EZCameraShake;
 using UnityEngine;
 
-public class GroundImpacter : MonoBehaviour {
+public class GroundImpacter : MonoBehaviour, IWaitForStart {
     public Action OnGroundHit;
     [SerializeField] CameraShaker[] shakers;
     [SerializeField] Camera leftCamera;
@@ -13,7 +14,12 @@ public class GroundImpacter : MonoBehaviour {
     [SerializeField] Transform groundPoint;
     [SerializeField] Transform player1;
 
+    public bool Ready { get; set; }
+    public StartMenu StartMenu { get; set; }
+
     IEnumerator Start() {
+        if (!Ready)
+            yield return null;
         while (player1.position.y > groundPoint.position.y)
             yield return null;
         OnGroundHit?.Invoke();

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Code;
 using EZCameraShake;
 using UnityEditor;
 using UnityEngine;
 
-public class Island : MonoBehaviour {
+public class Island : MonoBehaviour, IWaitForStart {
     [SerializeField] Transform islandCenter;
     [SerializeField] Transform islandMergePoint;
     [SerializeField] Transform destination;
@@ -18,6 +19,8 @@ public class Island : MonoBehaviour {
     Vector3 diff;
     bool mergeCompleted = false;
     
+    public bool Ready { get; set; }
+    public StartMenu StartMenu { get; set; }
 
     void Start()
     {
@@ -52,7 +55,7 @@ public class Island : MonoBehaviour {
     }
 
     void Update() {
-        if (mergeCompleted) {
+        if (!Ready || mergeCompleted) {
             return;
         }
         
