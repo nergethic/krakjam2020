@@ -144,6 +144,8 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
         animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
         if(inputRestoreCor != null)
             StopCoroutine (inputRestoreCor);
+        if (padAssigned)
+            StartMenu.TriggerPadVibrations(padIndex, 0.2f, 0.85f, 0.1f);
         inputRestoreCor = StartCoroutine (RestoreInput());
     }
 

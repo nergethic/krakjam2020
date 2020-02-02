@@ -96,6 +96,12 @@ namespace _Code {
                 secondaryWinGroup.SetActive(true);
         }
 
+        public void TriggerPadVibrations(int index, float lowFrequency, float highFrequency, float time) {
+            if(index == 0)
+                TriggerPrimaryPadVibration(lowFrequency, highFrequency, time);
+            if(index == 1)
+                TriggerSecondaryPadVibration(lowFrequency, highFrequency, time);
+        }
 
         public void TriggerBothPadsVibrations(float lowFrequency, float highFrequency, float time) {
             TriggerPrimaryPadVibration(lowFrequency, highFrequency, time);
