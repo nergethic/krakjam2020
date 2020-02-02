@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     bool equippingGun;
     bool inputBlocked = true;
     bool dead;
+    bool padAssigned;
 
     void Awake() {
         transform = gameObject.transform;
@@ -35,10 +36,12 @@ public class PlayerController : MonoBehaviour {
 
     void AssignGamepad() {
         var pads = Gamepad.all;
-        if (!pads.Any() || pads[padIndex] == null) {
-            Debug.Log($"Pad by index {padIndex} is not connected");
+        if (!pads.Any() || pads.Count < padIndex + 1) {
+            Debug.LogError($"Pad by index {padIndex} is not connected");
             return;
         }
+
+        padAssigned = true;
         pad = pads[padIndex];
     }
 
@@ -57,16 +60,16 @@ public class PlayerController : MonoBehaviour {
         bool rightKeyPressed;
         bool jumpPressed;
 
-        if (pad == null) {
-            shiftDown = Input.GetKey (KeyCode.LeftShift);
-            forwardKeyPressed = Input.GetKey (KeyCode.W);
-            backwardKeyPressed = Input.GetKey (KeyCode.S);
-            leftKeyPressed = Input.GetKey (KeyCode.A);
-            rightKeyPressed = Input.GetKey (KeyCode.D);
-            jumpPressed = Input.GetKeyDown (KeyCode.Space);
+        if (!padAssigned) {
+            shiftDown = Keyboard.current.leftShiftKey.isPressed;
+            forwardKeyPressed = Keyboard.current.wKey.isPressed;
+            backwardKeyPressed = Keyboard.current.sKey.isPressed;
+            leftKeyPressed = Keyboard.current.aKey.isPressed;
+            rightKeyPressed = Keyboard.current.dKey.isPressed;
+            jumpPressed = Keyboard.current.spaceKey.isPressed;
         }
         else {
-            shiftDown = pad.rightTrigger.isPressed;
+            shiftDown = pad.leftTrigger.isPressed;
             var leftStick = pad.leftStick.ReadValue();
 
             forwardKeyPressed = leftStick.y > MIN_STICK_TILT;
