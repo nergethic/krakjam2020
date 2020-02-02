@@ -117,6 +117,10 @@ public class PlayerController : MonoBehaviour {
         inputRestoreCor = StartCoroutine (RestoreInput());
     }
 
+    public void SetAnimationSpeed(float speed) {
+        animator.speed = speed;
+    }
+
     IEnumerator RestoreInput() {
         yield return new WaitForSeconds (3f);
         inputBlocked = false;

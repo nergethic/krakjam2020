@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3de6665689b6f4ebb24d6c9068886a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   robotBody: {fileID: 0}
   distanceWhenParent: 0.1
   flyTime: 25
@@ -804,6 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: 0
+  body: {fileID: 1032871568}
   bodyParts:
   - {fileID: 480402160}
   - {fileID: 70187778}
@@ -830,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3de6665689b6f4ebb24d6c9068886a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   robotBody: {fileID: 432112338}
   distanceWhenParent: 0.05
   flyTime: 4
@@ -857,6 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPlaceInPlayer: {fileID: 2064851830}
   weaponTag: Weapon
+  playerController: {fileID: 0}
 --- !u!1 &446381530 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5766016498751948549, guid: a78588bcb81dc4c48a4b9b9fbe25ea61,
@@ -1349,6 +1353,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: aa75cbe89a5c9af4e8c6015dec8824a5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78588bcb81dc4c48a4b9b9fbe25ea61, type: 3}
+--- !u!4 &641525591 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2273962397619458393, guid: a78588bcb81dc4c48a4b9b9fbe25ea61,
+    type: 3}
+  m_PrefabInstance: {fileID: 641525590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &646516813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,6 +1461,8 @@ MonoBehaviour:
     type: 3}
   drawGizmos: 0
   playerTag: 
+  Popup: {fileID: 0}
+  cameraTransform: {fileID: 0}
   middlePointOnCurve: {x: 10, y: 20, z: 0}
 --- !u!1 &693897204
 GameObject:
@@ -1999,6 +2011,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: aa75cbe89a5c9af4e8c6015dec8824a5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78588bcb81dc4c48a4b9b9fbe25ea61, type: 3}
+--- !u!4 &1032871568 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2273962397619458393, guid: a78588bcb81dc4c48a4b9b9fbe25ea61,
+    type: 3}
+  m_PrefabInstance: {fileID: 1032871567}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1151986813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,6 +2861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPlaceInPlayer: {fileID: 1544099659}
   weaponTag: Weapon
+  playerController: {fileID: 0}
 --- !u!114 &1426717637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2855,6 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3de6665689b6f4ebb24d6c9068886a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   robotBody: {fileID: 1426717638}
   distanceWhenParent: 0.05
   flyTime: 4
@@ -2881,6 +2901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: 1
+  body: {fileID: 641525591}
   bodyParts:
   - {fileID: 446381532}
   - {fileID: 296716700}

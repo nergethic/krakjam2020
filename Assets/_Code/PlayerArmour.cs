@@ -45,8 +45,11 @@ public class PlayerArmour : MonoBehaviour {
             OnHit?.Invoke (true);
             controller?.PlayDeathAnimation();
         }
-        else
-            robotBody.transform.localScale -= SCALE_INCREASE_STEP;
+        else {
+            robotBody.body.localScale -= SCALE_INCREASE_STEP;
+            controller?.SetAnimationSpeed(1/robotBody.body.localScale.x);
+        }
+
         OnHit?.Invoke (false);
         controller?.PlayHitAnimation();
         if (!randomParts.Any())
@@ -179,7 +182,8 @@ public class PlayerArmour : MonoBehaviour {
 
             if (exists) {
                 armorSocket.SetOccupied(true, armorPart);
-                robotBody.transform.localScale += SCALE_INCREASE_STEP;
+                robotBody.body.localScale += SCALE_INCREASE_STEP;
+                controller?.SetAnimationSpeed(1/robotBody.body.localScale.x);
                 Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.transform, armorSocket));
                 var structItem = new ArmourAndArmourPlaceholder(armorSocket, other.transform, cor);
                 structList.Add(structItem);

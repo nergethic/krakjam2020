@@ -164,7 +164,7 @@ public class CatapultShoot : MonoBehaviour
     {
       
       PlayerArmour playerArmour= enemyPlayerTransform.GetComponent<PlayerArmour>();
-      playerArmour.RemoveRandomBodyPart();
+      playerArmour.HandleHit();
     }
 
     void PlayeExplosionParticle()
