@@ -50,9 +50,9 @@ public class PlayerArmour : MonoBehaviour {
         if (!randomParts.Any())
             return;
         var firstRandomPart = randomParts[0];
-        LerpArmourAwayAndBack(randomParts);
         StartCoroutine(EnablePhysicsAfterSomeTime(firstRandomPart));
         randomParts.Remove (firstRandomPart);
+        LerpArmourAwayAndBack(randomParts);
     }
 
     #region Armour animation on hit
@@ -69,7 +69,7 @@ public class PlayerArmour : MonoBehaviour {
         var progress = 0f;
         while (progress < 1f) {
             foreach (var armourPart in parts) {
-                armourPart.transform.position += GetDirectionOut(armourPart.transform) * Time.deltaTime * UnityEngine.Random.Range(0.75f, 1.25f);
+                armourPart.transform.position += GetDirectionOut(armourPart.transform) * Time.deltaTime * UnityEngine.Random.Range(9f, 10f);
             }
             progress += Time.deltaTime*8f;
             yield return null;

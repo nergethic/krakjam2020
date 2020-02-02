@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379432384637589846}
-  m_LocalRotation: {x: -0.99978924, y: -0, z: -0, w: -0.020530075}
+  m_LocalRotation: {x: 0.9997892, y: 0, z: 0, w: 0.020532403}
   m_LocalPosition: {x: -29.31, y: -2.8802307, z: 12.1333065}
-  m_LocalScale: {x: 0.8, y: 0.8000001, z: 0.8000001}
+  m_LocalScale: {x: 0.80000013, y: 0.8000002, z: 0.8000003}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 177.647, y: 0, z: 0}
 --- !u!33 &1891269855526409801
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61,8 +61,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6922793697723135513, guid: d283ee64c775045458803b5d28e5c3a5, type: 3}
-  - {fileID: -8144480326748960128, guid: d283ee64c775045458803b5d28e5c3a5, type: 3}
+  - {fileID: 2100000, guid: 92e62905f12d78a46b1ce8fcbdb616f1, type: 2}
+  - {fileID: 2100000, guid: 92e62905f12d78a46b1ce8fcbdb616f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyType: 3
+  side: 0
   isAttached: 0
   player1: 0
 --- !u!135 &1379432384637589833
@@ -139,5 +140,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.77
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}

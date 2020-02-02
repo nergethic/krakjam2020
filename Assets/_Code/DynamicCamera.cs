@@ -33,8 +33,8 @@ public class DynamicCamera : MonoBehaviour {
 
     public void EnableWastedPositioning() {
         playerIsDead = true;
-        movementSpeed /= 3f;
-        rotationSpeed /= 3f;
+        movementSpeed /= 7f;
+        rotationSpeed /= 7f;
     }
 
     IEnumerator Start() {
