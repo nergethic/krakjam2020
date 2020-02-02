@@ -32,5 +32,6 @@ public class GroundImpacter : MonoBehaviour {
             shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
         }
         island.StartFragmenting();
+        player1.SetParent(island.transform);
     }
 }
