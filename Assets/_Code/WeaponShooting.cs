@@ -58,7 +58,7 @@ public class WeaponShooting : MonoBehaviour
            if (hit.transform.gameObject.tag.Equals(enemyPlayerTag))
            {
                PlayerArmour playerArmour = hit.transform.gameObject.GetComponent<PlayerArmour>();
-               playerArmour.RemoveRandomBodyPart();
+               playerArmour.HandleHit();
            }
        }
         
