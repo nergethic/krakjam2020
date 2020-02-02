@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Code.Robot_Parts;
 using UnityEngine;
 
 
@@ -15,6 +16,8 @@ public class CatapultShoot : MonoBehaviour
     [SerializeField] private GameObject rockPrefab;
     [SerializeField] private bool drawGizmos;
     [SerializeField] private string playerTag;
+    [SerializeField] private GameObject Popup;
+    [SerializeField] private Transform cameraTransform;
     public Vector3 middlePointOnCurve;
     private KeyCode launchKeycode=KeyCode.E;
     private bool isShooting = false;
@@ -26,11 +29,6 @@ public class CatapultShoot : MonoBehaviour
     private GameObject explosionParticle;
     
 
-    private void Awake()
-    {
-        
-        rockStartTransform = gameObject.transform;
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -52,6 +50,19 @@ public class CatapultShoot : MonoBehaviour
 
                 enemyPositionInShootMoment = enemyPlayerTransform.position;
             }
+            Popup.SetActive(true);
+            Popup.transform.LookAt(cameraTransform);
+        }
+        
+        
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Equals(playerTag))
+        {
+            Popup.SetActive(false);
         }
     }
 
@@ -105,8 +116,18 @@ public class CatapultShoot : MonoBehaviour
         var elapsedTime = 0f;
         while (elapsedTime < flyTime)
         {
-            rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
-                 enemyPositionInShootMoment, middlePointOnCurve);
+            if (elapsedTime < (flyTime * 9) / 10)
+            {
+                rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
+                    enemyPlayerTransform.position, middlePointOnCurve);
+                enemyPositionInShootMoment = enemyPlayerTransform.position;
+            }
+            else
+            {
+                rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
+                    enemyPositionInShootMoment, middlePointOnCurve);
+            }
+            
             elapsedTime += Time.deltaTime;
         
             yield return null;
@@ -141,8 +162,9 @@ public class CatapultShoot : MonoBehaviour
 
     void DealDMGToPlayer()
     {
-        Debug.Log("GET HIT");
-        //deal dmg to player implementation
+      
+      PlayerArmour playerArmour= enemyPlayerTransform.GetComponent<PlayerArmour>();
+      playerArmour.RemoveRandomBodyPart();
     }
 
     void PlayeExplosionParticle()

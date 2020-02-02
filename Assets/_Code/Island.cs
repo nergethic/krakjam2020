@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Code;
 using EZCameraShake;
 using UnityEditor;
 using UnityEngine;
 
-public class Island : MonoBehaviour {
+public class Island : MonoBehaviour, IWaitForStart {
+    public bool isFragmenting;
     [SerializeField] Transform islandCenter;
     [SerializeField] Transform islandMergePoint;
     [SerializeField] Transform destination;
@@ -18,6 +20,8 @@ public class Island : MonoBehaviour {
     Vector3 diff;
     bool mergeCompleted = false;
     
+    public bool Ready { get; set; }
+    public StartMenu StartMenu { get; set; }
 
     void Start()
     {
@@ -49,10 +53,12 @@ public class Island : MonoBehaviour {
         foreach (var chunk in chunks) {
             rigidbodies.Add(chunk.GetComponent<Rigidbody>());
         }
+
+        Ready = true;
     }
 
     void Update() {
-        if (mergeCompleted) {
+        if (!Ready || mergeCompleted || !isFragmenting) {
             return;
         }
         
@@ -80,28 +86,40 @@ public class Island : MonoBehaviour {
             yield return new WaitForSeconds(0.2f);
         }
 
+        int count = 0;
+        var bundle = new List<Rigidbody>();
+        float bundleTime = 0f;
         for (var i = 4; i < rigidbodies.Count; i++) {
             var r = rigidbodies[i];
             var outDir = (r.GetComponent<MeshCollider>().bounds.center - islandCenter.position).normalized / 5f;
 
             var pos = r.transform.position;
             float elapsedTime = 0f;
-            float waitTime = 0.1f;
+            float waitTime = 0.09f;
             while (elapsedTime < waitTime)
             {
-                r.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.down/6f), (elapsedTime / waitTime));
+                r.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.down/3f), (elapsedTime / waitTime));
                 elapsedTime += Time.deltaTime;
+                bundleTime += Time.deltaTime;
                 yield return null;
             }
 
-            if (shaker != null)
-                shaker.ShakeOnce(1.86f, 0.57f, 0.1f, 0.3f);
+            bundle.Add(r);
             
-            yield return new WaitForSeconds(0.25f);
-
-            r.isKinematic = false;
+            if (bundleTime > 2f) {
+                foreach (var brb in bundle) {
+                    brb.isKinematic = false;
+                    brb.AddForce(outDir*10f, ForceMode.Impulse);
+                    yield return new WaitForSeconds(0.06f);
+                }
+                if (shaker != null)
+                    shaker.ShakeOnce(1.9f, 0.57f, 0.1f, 0.3f);
+                yield return new WaitForSeconds(0.8f);
+                bundleTime = 0f;
+                bundle.Clear();
+            }
             
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
