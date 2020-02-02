@@ -9778,6 +9778,7 @@ GameObject:
   - component: {fileID: 653965478784689654}
   - component: {fileID: 9095246608783195981}
   - component: {fileID: 8672804920234445646}
+  - component: {fileID: 7751327278679306308}
   m_Layer: 16
   m_Name: Player
   m_TagString: Untagged
@@ -9865,6 +9866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padIndex: 0
+  isShootButtonPressed: 0
   dynamicCamera: {fileID: 0}
   walkSpeed: 0.02
   runSpeed: 0.07
@@ -9887,6 +9889,21 @@ MonoBehaviour:
   weaponPlaceInPlayer: {fileID: 3411084241729653648}
   weaponTag: Weapon
   playerController: {fileID: 9095246608783195981}
+--- !u!114 &7751327278679306308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382444431159161951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4955b91be6fee1341a4953d165350f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step1Sound: {fileID: 11400000, guid: 8030ca402b4830c47a5b86b4756d965b, type: 2}
+  step2Sound: {fileID: 11400000, guid: 626c8151036b3a44e8cb4a81661f2d97, type: 2}
+  step3Sound: {fileID: 11400000, guid: 26ce82aea1be93d43bbe676be0ae2813, type: 2}
 --- !u!1 &3937697866068982217
 GameObject:
   m_ObjectHideFlags: 0
