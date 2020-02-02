@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.11268882, g: 0.28156924, b: 0.7091791, a: 1}
+  m_IndirectSpecularColor: {r: 0.11269094, g: 0.2815719, b: 0.7091785, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4434,6 +4434,7 @@ MonoBehaviour:
   playerTag: Player
   Popup: {fileID: 184151920}
   cameraTransform: {fileID: 1291742749}
+  percentOfTravelWhenStopAutoAim: 0
   middlePointOnCurve: {x: 10, y: 20, z: 0}
 --- !u!135 &1764271878
 SphereCollider:
@@ -10204,6 +10205,146 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: aa75cbe89a5c9af4e8c6015dec8824a5, type: 2}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.72200936
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000059604645
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6918833
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.248
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -92.440994
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347750338051506412, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955447047361428398, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955447047361428398, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955447047361428398, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955447047361428398, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789450549253419343, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7484a58ae942514495b53acfc473186, type: 3}
 --- !u!33 &1714334615706496642
@@ -32337,6 +32478,7 @@ MonoBehaviour:
   playerTag: Player
   Popup: {fileID: 606031735}
   cameraTransform: {fileID: 1626763316}
+  percentOfTravelWhenStopAutoAim: 0
   middlePointOnCurve: {x: 10, y: 20, z: 0}
 --- !u!23 &8918143208947384259
 MeshRenderer:
