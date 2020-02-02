@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bc2d88661113af42b0092ef1631f632, type: 3}
-  m_Name: Hello
+  m_Name: WeaponShoot
   m_EditorClassIdentifier: 
-  name: Welcome
-  clip: {fileID: 8300000, guid: a542d5292d0610f4096174258271aad0, type: 3}
-  volume: 0.645
+  name: 
+  clip: {fileID: 0}
+  volume: 0
   source: {fileID: 0}
