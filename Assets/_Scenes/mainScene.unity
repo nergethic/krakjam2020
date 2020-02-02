@@ -3762,27 +3762,27 @@ PrefabInstance:
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: movementSpeed
-      value: 14
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: rotationSpeed
-      value: 23
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: backOffset
-      value: 2.22
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: upOffset
-      value: 2.46
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: rightOffset
-      value: 1.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487156, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
@@ -4313,6 +4313,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 179892915}
+    - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
+        type: 3}
+      propertyPath: backOffset
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487156, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: m_CullingMask.m_Bits

@@ -91,10 +91,17 @@ public class PlayerController : MonoBehaviour {
             animator.SetFloat (MOVEMENT_BLEND, shiftDown ? 2 : 1);
             if(shiftDown){
                 foreach (var runDustParticle in runDustParticles) {
-                    if (!runDustParticle.isEmitting)
+                    if (!runDustParticle.isPlaying)
                         runDustParticle.Play();
                 }
             }
+
+            if (!shiftDown) {
+                foreach (var runDustParticle in runDustParticles) {
+                    runDustParticle.Stop();
+                }
+            }
+
             transform.position += transform.forward * (shiftDown ? runSpeed : walkSpeed);
         }
         else if (backwardKeyPressed) {
