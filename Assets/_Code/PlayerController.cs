@@ -61,12 +61,12 @@ public class PlayerController : MonoBehaviour {
         bool jumpPressed;
 
         if (!padAssigned) {
-            shiftDown = Input.GetKey (KeyCode.LeftShift);
-            forwardKeyPressed = Input.GetKey (KeyCode.W);
-            backwardKeyPressed = Input.GetKey (KeyCode.S);
-            leftKeyPressed = Input.GetKey (KeyCode.A);
-            rightKeyPressed = Input.GetKey (KeyCode.D);
-            jumpPressed = Input.GetKeyDown (KeyCode.Space);
+            shiftDown = Keyboard.current.leftShiftKey.isPressed;
+            forwardKeyPressed = Keyboard.current.wKey.isPressed;
+            backwardKeyPressed = Keyboard.current.sKey.isPressed;
+            leftKeyPressed = Keyboard.current.aKey.isPressed;
+            rightKeyPressed = Keyboard.current.dKey.isPressed;
+            jumpPressed = Keyboard.current.spaceKey.isPressed;
         }
         else {
             shiftDown = pad.leftTrigger.isPressed;
