@@ -22,6 +22,14 @@ public class DynamicCamera : MonoBehaviour {
     bool groundHit;
     bool playerIsDead;
 
+    public void ChangeCameraMode() {
+        movementSpeed = 30f;
+        rotationSpeed = 30f;
+        backOffset = 2.22f;
+        upOffset = 2.46f;
+        rightOffset = 1.98f;
+    }
+
     void Awake() {
         transform = gameObject.transform;
         groudImpacter.OnGroundHit += HandleGroundHit;
@@ -71,6 +79,8 @@ public class DynamicCamera : MonoBehaviour {
         var lookRotation = Quaternion.LookRotation (dir.normalized);
         var speedMultiplier = deltaAngleToSpeedMultiplier.Evaluate (Quaternion.Angle (transform.rotation, lookRotation));
         transform.rotation = Quaternion.Slerp (transform.rotation, lookRotation, Time.deltaTime * rotationSpeed * speedMultiplier);
+        
+        
     }
 
     Vector3 GetCameraTargetPosition() {

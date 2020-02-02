@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PickUpWeapon : MonoBehaviour
-{
+public class PickUpWeapon : MonoBehaviour {
     [SerializeField] Transform weaponPlaceInPlayer;
     [SerializeField] string weaponTag="Weapon";
     [SerializeField] PlayerController playerController;
+    [SerializeField] DynamicCamera camera;
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag.Equals(weaponTag)) {
@@ -19,6 +16,7 @@ public class PickUpWeapon : MonoBehaviour
              rb.isKinematic = true;
              playerController.AnimateEquippingGun();
              weaponScript.SetAttached(true);
+             camera.ChangeCameraMode();
              ParentWeaponToPlayer(weaponScript);
          }
         }
