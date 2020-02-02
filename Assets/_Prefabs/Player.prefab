@@ -9778,7 +9778,7 @@ GameObject:
   - component: {fileID: 653965478784689654}
   - component: {fileID: 9095246608783195981}
   - component: {fileID: 8672804920234445646}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19209,13 +19209,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805887993329532375}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.121, y: -0.169, z: 0}
+  m_LocalRotation: {x: -0.5336603, y: -0.46390373, z: -0.5336603, w: 0.46390373}
+  m_LocalPosition: {x: 0.009, y: -0.195, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 728205741308269921}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -98, y: -90, z: 0}
 --- !u!114 &8558367624088499463
 MonoBehaviour:
   m_ObjectHideFlags: 0

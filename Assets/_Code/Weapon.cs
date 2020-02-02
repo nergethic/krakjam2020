@@ -10,7 +10,14 @@ public class Weapon : MonoBehaviour
     public bool isAttached;
 
     private void Start() {
+        laser.useWorldSpace = true;
+        laser.SetPosition(0, transform.position);
         laser.enabled = false;
+    }
+
+    private void Update() {
+        laser.SetPosition(0, laser.transform.position);
+        laser.SetPosition(1, laser.transform.position + laser.transform.forward * 30f);
     }
 
     public void SetAttached(bool value) {

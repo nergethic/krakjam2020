@@ -27,10 +27,10 @@ public class WeaponShooting : MonoBehaviour {
        if (Mouse.current.leftButton.wasPressedThisFrame) {
             Weapon weapon = gameObject.GetComponentInChildren<Weapon>();
             if (weapon != null) {
+                CastRaycast(weapon);
                 ResetLaserFx(weapon.laser);
-                CastRaycast();
             }
-        }
+       }
     }
 
    void ResetLaserFx(LineRenderer r) {
@@ -42,27 +42,29 @@ public class WeaponShooting : MonoBehaviour {
 
    IEnumerator DisplayLaserFx(LineRenderer r) {
        r.enabled = true;
-       yield return new WaitForSeconds(0.25f);
+       yield return new WaitForSeconds(0.15f);
        r.enabled = false;
    }
 
-    void CastRaycast() {
-       var ray=new Ray(camera.position,camera.forward);
+    void CastRaycast(Weapon weapon) {
+        var ray = new Ray(weapon.laser.transform.position + transform.forward/10f,weapon.laser.transform.forward);
+       weapon.laser.SetPosition(0, weapon.laser.transform.position);
        RaycastHit hit;
-     
-       if (Physics.Raycast(ray, out hit, 500,layerMask))
-       {
-           // TODO: Add shooting Shader method
+
+       if (Physics.SphereCast(ray, 0.8f, out hit, 500f, layerMask)) {
            Debug.Log(hit.collider.gameObject.name);
+           weapon.laser.SetPosition(1, hit.point);
            
            if (hit.transform.gameObject.tag.Equals(enemyPlayerTag))
            {
                PlayerArmour playerArmour = hit.transform.gameObject.GetComponent<PlayerArmour>();
                if (playerArmour != null) {
-                   // TODO play sound
+                   AudioManager.audioManagerInstance.PlaySound("WeaponShot");
                    playerArmour.HandleHit();
                }
            }
+       } else {
+           weapon.laser.SetPosition(1, weapon.laser.transform.position + weapon.laser.transform.forward * 30f);
        }
     }
 }

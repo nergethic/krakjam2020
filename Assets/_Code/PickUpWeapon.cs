@@ -11,7 +11,7 @@ public class PickUpWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag.Equals(weaponTag)) {
-            Debug.Log("Enter");
+            //Debug.Log("Enter");
          Weapon weaponScript = other.GetComponent<Weapon>();
          if (weaponScript != null && !weaponScript.isAttached) {
              var rb = weaponScript.gameObject.GetComponent<Rigidbody>();
