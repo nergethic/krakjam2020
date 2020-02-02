@@ -1,7 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using _Code.UI;
-using Boo.Lang;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -158,6 +157,7 @@ namespace _Code {
         void Collect() {
             UnityEditor.Undo.RecordObject(this, "Collect");
             var components = FindObjectsOfType<Component>();
+            
             var iWaits = new List<Component>();
             foreach (var component in components) {
                 if (component is IWaitForStart)
