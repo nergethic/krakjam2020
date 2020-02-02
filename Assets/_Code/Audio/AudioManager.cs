@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
       Sound s = sounds.Find(sound => sound.name == name);
       if (s != null)
       {
+         s.source.pitch = s.pitch;
          s.source = musicAudioSource;
          s.source.volume = s.volume;
          s.source.clip = s.clip;
