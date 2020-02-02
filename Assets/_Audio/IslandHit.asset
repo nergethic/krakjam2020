@@ -15,5 +15,7 @@ MonoBehaviour:
   name: IslandHit
   clip: {fileID: 8300000, guid: 8d76685a8764af74b9670b53d070567b, type: 3}
   volume: 1
+  mixerGroup: {fileID: 3382516704510703048, guid: 8eff115c7df8df042ae6296b4eb227e7,
+    type: 2}
   pitch: 0.8
   source: {fileID: 0}
