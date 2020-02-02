@@ -11,7 +11,6 @@ using Random = System.Random;
 
 public class PlayerArmour : MonoBehaviour {
     Action<bool> OnHit;
-    Vector3 SCALE_INCREASE_STEP = new Vector3(0.1f,0.1f,0.1f);
     [SerializeField] PlayerController controller;
     [SerializeField] RobotBody robotBody;
     [SerializeField] float distanceWhenParent = 0.05f;
@@ -44,10 +43,6 @@ public class PlayerArmour : MonoBehaviour {
             dead = true;
             OnHit?.Invoke (true);
             controller?.PlayDeathAnimation();
-        }
-        else {
-            robotBody.body.localScale -= SCALE_INCREASE_STEP;
-            controller?.SetAnimationSpeed(1/robotBody.body.localScale.x);
         }
 
         OnHit?.Invoke (false);
@@ -141,8 +136,7 @@ public class PlayerArmour : MonoBehaviour {
         rb.isKinematic = false;
         rb.AddForce (GetDirectionOut(part.transform).normalized*8f, ForceMode.Impulse);
         rb.useGravity = true;
-        var child = part.transform.GetChild(0);
-        child.gameObject.SetActive(true);
+        part.GetComponent<MeshCollider>().enabled = true;
     }
 
     void CheckIsArmourCloseToArmourPlace()
@@ -182,8 +176,6 @@ public class PlayerArmour : MonoBehaviour {
 
             if (exists) {
                 armorSocket.SetOccupied(true, armorPart);
-                robotBody.body.localScale += SCALE_INCREASE_STEP;
-                controller?.SetAnimationSpeed(1/robotBody.body.localScale.x);
                 Coroutine cor = StartCoroutine(ArmourTravelToPlayer(other.transform, armorSocket));
                 var structItem = new ArmourAndArmourPlaceholder(armorSocket, other.transform, cor);
                 structList.Add(structItem);
@@ -192,12 +184,12 @@ public class PlayerArmour : MonoBehaviour {
     }
 
     IEnumerator ArmourTravelToPlayer(Transform armour, BodyPart bodyPart) {
-        var triggerCol = armour.transform.GetChild(0).GetComponentInChildren<BoxCollider>();
+        var triggerCol = armour.GetComponent<MeshCollider>();
         if (triggerCol == null)
             Debug.LogError("no trigger collider on armor part!");
 
         armour.GetComponentInChildren<Rigidbody>().isKinematic = true;
-        triggerCol.gameObject.SetActive(false);
+        triggerCol.enabled = false;
         
         var elapsedTime = 0f;
         while (elapsedTime < flyTime)

@@ -30,7 +30,16 @@ namespace _Code.Robot_Parts {
         }
 
         [Serializable]
-        public enum BodyType { Wrist = 0, Shoulder = 1, Helm = 2, Chest = 3, Leg = 4 }
+        public enum BodyType {
+            Wrist = 0, 
+            Shoulder = 1, 
+            Helm = 2, 
+            Chest = 3, 
+            UpperLeg = 4,
+            Feet = 5,
+            Abdomen = 6,
+            LowerLeg = 7
+        }
         [Serializable]
         public enum BodySide { Center = 0, Right = 2, Left = 3} 
     }

@@ -11,6 +11,7 @@
           <e p="ArmourPart.cs" t="Include" />
           <e p="Audio" t="Include">
             <e p="AudioManager.cs" t="Include" />
+            <e p="MovmentSound.cs" t="Include" />
             <e p="Sound.cs" t="Include" />
           </e>
           <e p="CameraShakeInstance.cs" t="Include" />
@@ -21,7 +22,6 @@
           <e p="GrassSpawner.cs" t="Include" />
           <e p="GroundImpacter.cs" t="Include" />
           <e p="Island.cs" t="Include" />
-          <e p="MovmentSound.cs" t="Include" />
           <e p="PickUpWeapon.cs" t="Include" />
           <e p="PlayerArmour.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] int padIndex = 0;
+    public bool isShootButtonPressed;
     public DynamicCamera dynamicCamera;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour {
         if (inputBlocked)
             return;
 
+        isShootButtonPressed = pad.xButton.wasPressedThisFrame;
+        
         bool shiftDown;
         bool forwardKeyPressed;
         bool backwardKeyPressed;
