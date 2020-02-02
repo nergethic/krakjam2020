@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
     bool dead;
     bool padAssigned;
 
+    public int PadIndex => padIndex;
+
     void Awake() {
         transform = gameObject.transform;
         AssignGamepad();
