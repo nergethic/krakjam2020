@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 namespace _Code {
     public class StartMenu : MonoBehaviour {
         [SerializeField] GameObject title;
+        [SerializeField] GameObject primaryWinGroup;
+        [SerializeField] GameObject secondaryWinGroup;
         [SerializeField] StartGamePopup primaryPopup;
         [SerializeField] StartGamePopup secondaryPopup;
         [SerializeField] Rigidbody primaryPlayerRigidbody;
@@ -85,6 +87,13 @@ namespace _Code {
                 (dependentComponent as IWaitForStart).Ready = true;
             foreach (var playerRigidbody in playerRigidbodies) 
                 playerRigidbody.isKinematic = false;
+        }
+
+        public void ShowWinOverlay(bool isFirstPlayer) {
+            if (isFirstPlayer)
+                primaryWinGroup.SetActive(true);
+            else
+                secondaryWinGroup.SetActive(true);
         }
 
 
