@@ -6,6 +6,8 @@ using UnityEngine.UI;
 namespace _Code.UI {
     public class StartGamePopup : MonoBehaviour {
         [SerializeField, Range(0.01f, 5)] float speed = 1;
+        [SerializeField] GameObject fadeGroup;
+        [SerializeField] GameObject readyGroup;
         [SerializeField] TextMeshProUGUI[] texts;
         [SerializeField] Image image;
         [SerializeField] AnimationCurve fadingCurve;
@@ -19,13 +21,16 @@ namespace _Code.UI {
 
         [ContextMenu("Stop")]
         public void StopFading() {
+            fadeGroup.SetActive(false);
+            readyGroup.SetActive(true);
             if(fadingCoroutine != null)
                 StopCoroutine(FadingCoroutine());
         }
 
-        public void SetActive(bool value) {
-            gameObject.SetActive(value);
-            StopFading();
+        public void Disable() {
+            if(fadingCoroutine != null)
+                StopCoroutine(FadingCoroutine());
+            gameObject.SetActive(false);
         }
 
         IEnumerator FadingCoroutine() {

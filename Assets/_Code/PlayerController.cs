@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
             jumpPressed = Input.GetKeyDown (KeyCode.Space);
         }
         else {
-            shiftDown = pad.rightTrigger.isPressed;
+            shiftDown = pad.leftTrigger.isPressed;
             var leftStick = pad.leftStick.ReadValue();
 
             forwardKeyPressed = leftStick.y > MIN_STICK_TILT;

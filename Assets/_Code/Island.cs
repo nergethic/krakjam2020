@@ -60,7 +60,6 @@ public class Island : MonoBehaviour, IWaitForStart {
         }
         
         var pos = transform.position;
-
         var currentDiff = destination.position - islandMergePoint.position;
         if (currentDiff.magnitude > 0.1f) {
             pos += diff * Time.deltaTime / timeToMergeInSeconds;
@@ -112,6 +111,7 @@ public class Island : MonoBehaviour, IWaitForStart {
                 if (shaker != null)
                     shaker.ShakeOnce(1.9f, 0.57f, 0.1f, 0.3f);
                 yield return new WaitForSeconds(0.8f);
+                StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.3f);
                 bundleTime = 0f;
                 bundle.Clear();
             }

@@ -23,6 +23,7 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         while (player1.position.y > groundPoint.position.y)
             yield return null;
         OnGroundHit?.Invoke();
+        StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.4f);
         Execute();
         yield return new WaitForSeconds (dynamicCamera.startPointLookDuration);
         leftCamera.rect = new Rect(-0.5f, 0f, 1f, 1f);
