@@ -19,7 +19,7 @@ public class Island : MonoBehaviour, IWaitForStart {
     List<Rigidbody> rigidbodies;
     Vector3 diff;
     bool mergeCompleted = false;
-    
+    private bool stopPlayAudio;
     public bool Ready { get; set; }
     public StartMenu StartMenu { get; set; }
 
@@ -53,8 +53,6 @@ public class Island : MonoBehaviour, IWaitForStart {
         foreach (var chunk in chunks) {
             rigidbodies.Add(chunk.GetComponent<Rigidbody>());
         }
-
-        Ready = true;
     }
 
     void Update() {
@@ -64,10 +62,17 @@ public class Island : MonoBehaviour, IWaitForStart {
         
         var pos = transform.position;
         var currentDiff = destination.position - islandMergePoint.position;
+        if (currentDiff.magnitude < 5.5f && !stopPlayAudio)
+        {
+            stopPlayAudio = true;
+            AudioManager.audioManagerInstance.PlaySound("IslandHit");
+        }
+
         if (currentDiff.magnitude > 0.1f) {
             pos += diff * Time.deltaTime / timeToMergeInSeconds;
         } else {
             mergeCompleted = true;
+          
             if (shaker != null)
                 shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
         }
@@ -88,6 +93,7 @@ public class Island : MonoBehaviour, IWaitForStart {
         int count = 0;
         var bundle = new List<Rigidbody>();
         float bundleTime = 0f;
+        bool positiveRandom = false;
         for (var i = 4; i < rigidbodies.Count; i++) {
             var r = rigidbodies[i];
             var outDir = (r.GetComponent<MeshCollider>().bounds.center - islandCenter.position).normalized / 5f;
@@ -104,18 +110,22 @@ public class Island : MonoBehaviour, IWaitForStart {
             }
 
             bundle.Add(r);
+
+            var t = positiveRandom ? 2 + Random.Range(0.5f, 1f) :  2 - Random.Range(0.5f, 1f);
+            positiveRandom = !positiveRandom;
+            var itsaBreakTime = bundleTime > t;
             
-            if (bundleTime > 2f) {
+            if (itsaBreakTime) {
                 foreach (var brb in bundle) {
                     brb.isKinematic = false;
-                    brb.AddForce(outDir*10f, ForceMode.Impulse);
+                    brb.AddForce(outDir * 10f, ForceMode.Impulse);
                     yield return new WaitForSeconds(0.06f);
                 }
                 if (shaker != null)
                     shaker.ShakeOnce(1.9f, 0.57f, 0.1f, 0.3f);
                 yield return new WaitForSeconds(0.8f);
                 if(StartMenu != null)
-                    StartMenu.TriggerBothPadsVibrations(0.9f, 1, 0.3f);
+                    StartMenu.TriggerIslandBreakVibration(bundle[0].transform);
                 bundleTime = 0f;
                 bundle.Clear();
             }

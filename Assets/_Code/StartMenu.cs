@@ -7,8 +7,11 @@ using UnityEngine.InputSystem;
 
 namespace _Code {
     public class StartMenu : MonoBehaviour {
+        [SerializeField] GameObject title;
         [SerializeField] StartGamePopup primaryPopup;
         [SerializeField] StartGamePopup secondaryPopup;
+        [SerializeField] Rigidbody primaryPlayerRigidbody;
+        [SerializeField] Rigidbody secondaryPlayerRigidbody;
         [SerializeField] Rigidbody[] playerRigidbodies;
         [SerializeField] Component[] dependentComponents;
         Gamepad primaryGamepad;
@@ -22,6 +25,8 @@ namespace _Code {
         bool ready;
         
         const float READY_VIBRATION_TIME = 0.2F;
+        const float MIN_BREAK_FREQUENCY = 0.1F;
+        const float MAX_BREAK_FREQUENCY = 0.4F;
         
         void Awake() {
             AssignGamepads();
@@ -65,7 +70,7 @@ namespace _Code {
 
             if(!Gamepad.all.Any() && Keyboard.current.spaceKey.wasPressedThisFrame)
                 Invoke(nameof(SetReady), 1f);
-            else if(Gamepad.all.Any() && Gamepad.all.Count == 0 && primaryGamepad.aButton.wasPressedThisFrame)
+            else if(Gamepad.all.Any() && Gamepad.all.Count == 1 && primaryGamepad.aButton.wasPressedThisFrame)
                 Invoke(nameof(SetReady), 1f);
             if (primaryPlayerReady && secondaryPlayerReady)
                 Invoke(nameof(SetReady), 1f);
@@ -73,6 +78,7 @@ namespace _Code {
 
         void SetReady() {
             ready = true;
+            title.SetActive(false);
             primaryPopup.Disable();
             secondaryPopup.Disable();
             foreach (var dependentComponent in dependentComponents) 
@@ -110,9 +116,28 @@ namespace _Code {
         }
 
         public void TriggerIslandBreakVibration(Transform islandPart) {
-            
+            PrimaryIslandVibration(islandPart);
+            SecondaryIslandVibration(islandPart);
+        }
+
+        void PrimaryIslandVibration(Transform islandPart) {
+            var magnitude = (primaryPlayerRigidbody.transform.position - islandPart.position).magnitude;
+            magnitude = Mathf.Clamp(magnitude, 0, 100);
+            var frequency = 1 - magnitude / 100f;
+            var low = frequency - 0.2f >= MIN_BREAK_FREQUENCY ? frequency : MIN_BREAK_FREQUENCY;
+            var high = frequency + 0.2f >= MAX_BREAK_FREQUENCY ? frequency : MAX_BREAK_FREQUENCY;
+            TriggerPrimaryPadVibration(low, high, 0.3f);
         }
         
+        void SecondaryIslandVibration(Transform islandPart) {
+            var magnitude = (secondaryPlayerRigidbody.transform.position - islandPart.position).magnitude;
+            magnitude = Mathf.Clamp(magnitude, 0, 100);
+            var frequency = 1 - magnitude / 100f;
+            var low = frequency - 0.2f >= MIN_BREAK_FREQUENCY ? frequency : MIN_BREAK_FREQUENCY;
+            var high = frequency + 0.2f >= MAX_BREAK_FREQUENCY ? frequency : MAX_BREAK_FREQUENCY;
+            TriggerPrimaryPadVibration(low, high, 0.3f);
+        }
+
 #if UNITY_EDITOR
         [ContextMenu("Collect")]
         void Collect() {
@@ -130,6 +155,10 @@ namespace _Code {
                 var rb = playerController.GetComponent<Rigidbody>();
                 if (rb != null)
                     rigidbodies.Add(rb);
+                if (playerController.PadIndex == 0)
+                    primaryPlayerRigidbody = rb;
+                else if (playerController.PadIndex == 1)
+                    secondaryPlayerRigidbody = rb;
             }
             playerRigidbodies = rigidbodies.ToArray();
         }
