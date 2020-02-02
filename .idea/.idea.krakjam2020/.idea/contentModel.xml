@@ -18,6 +18,7 @@
           <e p="CameraShakePresets.cs" t="Include" />
           <e p="CameraShaker.cs" t="Include" />
           <e p="CatapultShoot.cs" t="Include" />
+          <e p="DeadZone.cs" t="Include" />
           <e p="DynamicCamera.cs" t="Include" />
           <e p="GrassSpawner.cs" t="Include" />
           <e p="GroundImpacter.cs" t="Include" />
