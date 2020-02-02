@@ -46,6 +46,7 @@
         <e p="_Materials" t="Include">
           <e p="island.shader" t="Include" />
           <e p="lasershit.shader" t="Include" />
+          <e p="weaponReload.shader" t="Include" />
         </e>
         <e p="_Prefabs" t="Include">
           <e p="Tower Defence" t="Include">
