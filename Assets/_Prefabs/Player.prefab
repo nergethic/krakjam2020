@@ -9776,6 +9776,7 @@ GameObject:
   - component: {fileID: 3382444431159161948}
   - component: {fileID: 653965478784689655}
   - component: {fileID: 653965478784689654}
+  - component: {fileID: 823267822484440414}
   - component: {fileID: 9095246608783195981}
   - component: {fileID: 8672804920234445646}
   m_Layer: 0
@@ -9852,6 +9853,21 @@ CapsuleCollider:
   m_Height: 1.8631015
   m_Direction: 1
   m_Center: {x: 0, y: 0.9057634, z: 0}
+--- !u!114 &823267822484440414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382444431159161951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4955b91be6fee1341a4953d165350f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step1Sound: {fileID: 11400000, guid: 8030ca402b4830c47a5b86b4756d965b, type: 2}
+  step2Sound: {fileID: 11400000, guid: 626c8151036b3a44e8cb4a81661f2d97, type: 2}
+  step3Sound: {fileID: 11400000, guid: 26ce82aea1be93d43bbe676be0ae2813, type: 2}
 --- !u!114 &9095246608783195981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9865,6 +9881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padIndex: 0
+  isShootButtonPressed: 0
   dynamicCamera: {fileID: 0}
   walkSpeed: 0.02
   runSpeed: 0.07
