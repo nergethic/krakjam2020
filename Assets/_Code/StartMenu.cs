@@ -52,20 +52,19 @@ namespace _Code {
         void Update() {
             if(ready)
                 return;
-            if (primaryGamepad.aButton.isPressed) {
+            if (primaryGamepad != null && primaryGamepad.aButton.isPressed) {
                 primaryPopup.StopFading();
                 primaryPlayerReady = true;
                 TriggerPrimaryPadVibration(0.7f, 1f, READY_VIBRATION_TIME);
             }
-            if (secondaryGamepad.aButton.isPressed) {
+            if (secondaryGamepad != null && secondaryGamepad.aButton.isPressed) {
                 secondaryPopup.StopFading();
                 secondaryPlayerReady = true;
                 TriggerSecondaryPadVibration(0.7f, 1f, READY_VIBRATION_TIME);
             }
 
-            if (primaryPlayerReady && secondaryPlayerReady) {
+            if (primaryPlayerReady)//  && secondaryPlayerReady)
                 Invoke(nameof(SetReady), 1f);
-            }
         }
 
         void SetReady() {
@@ -78,13 +77,6 @@ namespace _Code {
                 playerRigidbody.isKinematic = false;
         }
 
-        void StopPrimaryPadVibration() {
-            primaryGamepad.ResetHaptics();
-        }
-        
-        void StopSecondaryPadVibration() {
-            secondaryGamepad.ResetHaptics();
-        }
 
         public void TriggerBothPadsVibrations(float lowFrequency, float highFrequency, float time) {
             TriggerPrimaryPadVibration(lowFrequency, highFrequency, time);
@@ -92,13 +84,25 @@ namespace _Code {
         }
         
         public void TriggerPrimaryPadVibration(float lowFrequency, float highFrequency, float time) {
+            if(primaryGamepad == null)
+                return;
             primaryGamepad.SetMotorSpeeds(lowFrequency, highFrequency);
             Invoke(nameof(StopPrimaryPadVibration), time);
         }
         
         public void TriggerSecondaryPadVibration(float lowFrequency, float highFrequency, float time) {
+            if(secondaryGamepad == null)
+                return;
             secondaryGamepad.SetMotorSpeeds(lowFrequency, highFrequency);
             Invoke(nameof(StopSecondaryPadVibration), time);
+        }
+        
+        void StopPrimaryPadVibration() {
+            primaryGamepad.ResetHaptics();
+        }
+        
+        void StopSecondaryPadVibration() {
+            secondaryGamepad.ResetHaptics();
         }
 
         public void TriggerIslandBreakVibration() {
