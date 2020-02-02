@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour {
 
     void AssignGamepad() {
         var pads = Gamepad.all;
-        if (!pads.Any() || pads.Count < padIndex) {
-            Debug.Log($"Pad by index {padIndex} is not connected");
+        if (!pads.Any() || pads.Count < padIndex + 1) {
+            Debug.LogError($"Pad by index {padIndex} is not connected");
             return;
         }
         pad = pads[padIndex];
