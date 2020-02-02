@@ -106,7 +106,6 @@
           </e>
           <e p="ShakeDemo.cs" t="Include" />
         </e>
-        <e p="KeyTip.cs" t="Include" />
         <e p="LowpolyVegetationPackFree" t="Include">
           <e p="Readme.txt" t="Include" />
         </e>
