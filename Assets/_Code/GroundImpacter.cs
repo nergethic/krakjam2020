@@ -18,7 +18,7 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
     public StartMenu StartMenu { get; set; }
 
     IEnumerator Start() {
-        if (!Ready)
+        while (!Ready)
             yield return null;
         while (player1.position.y > groundPoint.position.y)
             yield return null;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace _Code.UI {
     public class StartGamePopup : MonoBehaviour {
-        [SerializeField, Range(0.01f, 5)] float speed;
+        [SerializeField, Range(0.01f, 5)] float speed = 1;
         [SerializeField] TextMeshProUGUI[] texts;
         [SerializeField] Image image;
         [SerializeField] AnimationCurve fadingCurve;
