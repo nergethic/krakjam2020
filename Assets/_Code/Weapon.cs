@@ -6,13 +6,27 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] BoxCollider collisionCollider;
+    [SerializeField] MeshRenderer weaponReloadFX;
+    [SerializeField] Material weaponReloadMat;
     public LineRenderer laser;
     public bool isAttached;
+    Material mat;
 
+    int reloadProgressShaderID;
+    
     private void Start() {
+        weaponReloadFX.material = weaponReloadMat;
+        mat = weaponReloadFX.material;
+        reloadProgressShaderID = Shader.PropertyToID("_ReloadLevel");
+        mat.SetFloat(reloadProgressShaderID, 0f);
+        
         laser.useWorldSpace = true;
         laser.SetPosition(0, transform.position);
         laser.enabled = false;
+    }
+
+    public void SetReloadLevel(float value) {
+        mat.SetFloat(reloadProgressShaderID, value);
     }
 
     private void Update() {
