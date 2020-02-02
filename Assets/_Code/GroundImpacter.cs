@@ -12,14 +12,17 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
     [SerializeField] DynamicCamera dynamicCamera;
     [SerializeField] Camera rightCamera;
     [SerializeField] Camera rightUICamera;
-    [SerializeField] Island island;
     [SerializeField] Transform groundPoint;
+    [SerializeField] Island island1;
     [SerializeField] Transform player1;
+    [SerializeField] Island island2;
+    [SerializeField] Transform player2;
 
     public bool Ready { get; set; }
     public StartMenu StartMenu { get; set; }
 
     IEnumerator Start() {
+        Ready = true;
         while (!Ready)
             yield return null;
         while (player1.position.y > groundPoint.position.y)
@@ -37,7 +40,10 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         foreach (var shaker in shakers) {
             shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
         }
-        island.StartFragmenting();
-        player1.SetParent(island.transform);
+        island1.StartFragmenting();
+        player1.SetParent(island1.transform);
+        
+        island2.StartFragmenting();
+        player2.SetParent(island2.transform);
     }
 }

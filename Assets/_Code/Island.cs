@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class Island : MonoBehaviour, IWaitForStart {
+    public bool isFragmenting;
     [SerializeField] Transform islandCenter;
     [SerializeField] Transform islandMergePoint;
     [SerializeField] Transform destination;
@@ -52,10 +53,12 @@ public class Island : MonoBehaviour, IWaitForStart {
         foreach (var chunk in chunks) {
             rigidbodies.Add(chunk.GetComponent<Rigidbody>());
         }
+
+        Ready = true;
     }
 
     void Update() {
-        if (!Ready || mergeCompleted) {
+        if (!Ready || mergeCompleted || !isFragmenting) {
             return;
         }
         
@@ -92,7 +95,7 @@ public class Island : MonoBehaviour, IWaitForStart {
 
             var pos = r.transform.position;
             float elapsedTime = 0f;
-            float waitTime = 0.15f;
+            float waitTime = 0.09f;
             while (elapsedTime < waitTime)
             {
                 r.transform.position = Vector3.Lerp(pos, pos+outDir+(Vector3.down/3f), (elapsedTime / waitTime));
@@ -103,7 +106,7 @@ public class Island : MonoBehaviour, IWaitForStart {
 
             bundle.Add(r);
             
-            if (bundleTime > 2.5f) {
+            if (bundleTime > 2f) {
                 foreach (var brb in bundle) {
                     brb.isKinematic = false;
                     brb.AddForce(outDir*10f, ForceMode.Impulse);
