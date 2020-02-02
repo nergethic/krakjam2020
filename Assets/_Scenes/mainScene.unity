@@ -5574,7 +5574,7 @@ PrefabInstance:
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: backOffset
-      value: 3.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
@@ -6266,7 +6266,7 @@ PrefabInstance:
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
       propertyPath: backOffset
-      value: 3.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5004901488685487154, guid: 84aafd49554096b4cb414d096379c068,
         type: 3}
@@ -6542,6 +6542,16 @@ PrefabInstance:
       propertyPath: dynamicCamera
       value: 
       objectReference: {fileID: 40965364}
+    - target: {fileID: 9095246608783195981, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: jumpForce
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095246608783195981, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: padIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1777658045399795276, guid: e9b9af234d8b54c408c43b9bc0257057,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6746,6 +6756,11 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 8672804920234445646, guid: e9b9af234d8b54c408c43b9bc0257057,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 40965364}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9b9af234d8b54c408c43b9bc0257057, type: 3}
 --- !u!4 &1545445395 stripped
@@ -14411,7 +14426,12 @@ PrefabInstance:
     - target: {fileID: 7612327667400450530, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
       propertyPath: padIndex
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612327667400450530, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: jumpForce
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 1096388630160251107, guid: e7484a58ae942514495b53acfc473186,
         type: 3}
@@ -14723,6 +14743,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 8054506699899573729, guid: e7484a58ae942514495b53acfc473186,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 333212058}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7484a58ae942514495b53acfc473186, type: 3}
 --- !u!198 &1701416406273110947 stripped
