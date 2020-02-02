@@ -19,7 +19,7 @@ public class Island : MonoBehaviour, IWaitForStart {
     List<Rigidbody> rigidbodies;
     Vector3 diff;
     bool mergeCompleted = false;
-    
+    private bool stopPlayAudio;
     public bool Ready { get; set; }
     public StartMenu StartMenu { get; set; }
 
@@ -62,10 +62,17 @@ public class Island : MonoBehaviour, IWaitForStart {
         
         var pos = transform.position;
         var currentDiff = destination.position - islandMergePoint.position;
+        if (currentDiff.magnitude < 5.5f && !stopPlayAudio)
+        {
+            stopPlayAudio = true;
+            AudioManager.audioManagerInstance.PlaySound("IslandHit");
+        }
+
         if (currentDiff.magnitude > 0.1f) {
             pos += diff * Time.deltaTime / timeToMergeInSeconds;
         } else {
             mergeCompleted = true;
+          
             if (shaker != null)
                 shaker.ShakeOnce(10f, 2.4f, 0.2f, 0.5f);
         }

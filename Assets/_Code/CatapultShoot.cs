@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Code.Robot_Parts;
+using EZCameraShake;
 using UnityEngine;
 
 
 
 public class CatapultShoot : MonoBehaviour
-{  
-   
+{
+    [SerializeField] private CameraShaker cameraShaker;
     [SerializeField] Vector3[] positions = new Vector3[50];
     [SerializeField] Transform rockStartTransform;
     [SerializeField]  float flyTime = 4.0f;
@@ -31,10 +32,7 @@ public class CatapultShoot : MonoBehaviour
     private Coroutine cor;
     private bool canShoot=true;
     private int numPoints = 50;
-   
-    
-    
-
+    private Coroutine shakeCor;
 
     private void OnTriggerStay(Collider other)
     {
@@ -43,6 +41,7 @@ public class CatapultShoot : MonoBehaviour
         {
             if (a.isShootButtonPressed && canShoot)
             {
+                ResetShakeCor();
                 PlayShootParticle();
                 AudioManager.audioManagerInstance.PlaySound("CannonShoot");
                 canShoot = false;
@@ -62,11 +61,20 @@ public class CatapultShoot : MonoBehaviour
             Popup.SetActive(true);
             Popup.transform.LookAt(cameraTransform);
         }
-        
-        
-        
     }
 
+    IEnumerator ShakeScreenAfterSomeTime() {
+        yield return new WaitForSeconds(0.5f);
+        cameraShaker.ShakeOnce(3.8f, 0.97f, 0.05f, 0.3f);
+    }
+
+    void ResetShakeCor()
+    {
+        if (shakeCor != null)
+            StopCoroutine(shakeCor);
+        shakeCor = StartCoroutine(ShakeScreenAfterSomeTime());
+    }
+    
     void PlayShootParticle()
     {
         GameObject explosionParticle = Instantiate(shootParticle, rockStartTransform.position,rockStartTransform.rotation);
