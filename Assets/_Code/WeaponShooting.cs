@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Code;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.InputSystem;
 
-public class WeaponShooting : MonoBehaviour { 
+public class WeaponShooting : MonoBehaviour, IWaitForStart { 
     [SerializeField] int shootButton;
     [SerializeField] string enemyPlayerTag;
     [SerializeField] Transform camera;
+
    
    Coroutine shootFxCor;
    int layerMask;
@@ -61,10 +63,14 @@ public class WeaponShooting : MonoBehaviour {
                if (playerArmour != null) {
                    AudioManager.audioManagerInstance.PlaySound("WeaponShot");
                    playerArmour.HandleHit();
+                   
                }
            }
        } else {
            weapon.laser.SetPosition(1, weapon.laser.transform.position + weapon.laser.transform.forward * 30f);
        }
     }
+
+    public bool Ready { get; set; }
+    public StartMenu StartMenu { get; set; }
 }
