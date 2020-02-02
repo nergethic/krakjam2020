@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
     public void PlayHitAnimation() {
         if (dead)
             return;
-        inputBlocked = true;
+        //inputBlocked = true;
         animator.SetTrigger (PLAYER_HIT_TRIGGER_NAME);
         if(inputRestoreCor != null)
             StopCoroutine (inputRestoreCor);
