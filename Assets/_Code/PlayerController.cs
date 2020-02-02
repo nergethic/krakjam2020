@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
     const string GROUND_HIT_TRIGGER_NAME = "HitGround";
     const string PLAYER_HIT_TRIGGER_NAME = "Hit";
     const float JUMP_COOLDOWN = 1.5f;
-    const float MIN_STICK_TILT = 0.05f;
+    const float MIN_STICK_TILT = 0.2f;
     new Transform transform;
     Gamepad pad;
     float timeOfLastJump = -2f;
@@ -77,13 +77,13 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
         }
         else {
             isShootButtonPressed = pad.xButton.wasPressedThisFrame;
-            shiftDown = pad.leftTrigger.isPressed;
+            shiftDown = pad.rightTrigger.isPressed;
             var leftStick = pad.leftStick.ReadValue();
 
             forwardKeyPressed = leftStick.y > MIN_STICK_TILT;
             backwardKeyPressed = leftStick.y < -MIN_STICK_TILT;
-            rightKeyPressed = leftStick.x > MIN_STICK_TILT;
-            leftKeyPressed = leftStick.x < -MIN_STICK_TILT;
+            rightKeyPressed = pad.rightStick.ReadValue().x > MIN_STICK_TILT;
+            leftKeyPressed = pad.rightStick.ReadValue().x < -MIN_STICK_TILT;
 
             jumpPressed = pad.aButton.isPressed;
         }
