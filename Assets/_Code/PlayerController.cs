@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
     bool padAssigned;
 
     public int PadIndex => padIndex;
+    public Gamepad Pad => pad;
 
     void Awake() {
         transform = gameObject.transform;
