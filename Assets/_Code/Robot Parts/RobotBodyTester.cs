@@ -6,10 +6,10 @@ namespace _Code.Robot_Parts {
 
         [ContextMenu("gdsf")]
         void Test() {
-            var body = FindObjectOfType<RobotBody>();
-            var (a, b) = body.GetBodyPart(toFind);
-            if(a)
-                Debug.Log(b.name);
+//            var body = FindObjectOfType<RobotBody>();
+//            var (a, b) = body.GetBodyPart(toFind);
+//            if(a)
+//                Debug.Log(b.name);
         }
     }
 }

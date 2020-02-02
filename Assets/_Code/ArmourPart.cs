@@ -6,6 +6,7 @@ using UnityEngine;
 public class ArmourPart : MonoBehaviour
 {
     public BodyPart.BodyType bodyType;
+    public BodyPart.BodySide side;
     public bool isAttached;
     public bool player1;
     void Start()

@@ -11,9 +11,9 @@ namespace _Code.Robot_Parts {
         [SerializeField] BodyPart[] bodyParts;
         List<BodyPart.BodyType> centerBodyTypes = new List<BodyPart.BodyType> {BodyPart.BodyType.Chest, BodyPart.BodyType.Helm};
 
-        public (bool, BodyPart) GetBodyPart(BodyPart.BodyType type) {
+        public (bool, BodyPart) GetBodyPart(ArmourPart part) {
             foreach (var bodyPart in bodyParts) {
-                if (bodyPart.Type == type) {
+                if (bodyPart.Type == part.bodyType && bodyPart.Side == part.side) {
                     if (!bodyPart.IsOccupied)
                         return (true, bodyPart);
                     if (centerBodyTypes.Contains(bodyPart.Type)) {
@@ -42,12 +42,14 @@ namespace _Code.Robot_Parts {
 
         [ContextMenu("Setup")]
         void SetupPartsInsideRig() {
+            bodyParts = GetComponentsInChildren<BodyPart>();
+            return;
             Undo.RecordObject(this, "setup");
             
-            var namesToFind = new [] {"lowerArm", "head", "chest", "lowerleg"};
+            var namesToFind = new [] {"lowerArm", "chest", "lowerleg", "upperleg", "upperarm", "foot"};
             var parts = new List<BodyPart>();
             foreach (var t in GetComponentsInChildren<Transform>()) {
-                AddFromList(namesToFind, t, parts);
+                //AddFromList(namesToFind, t, parts);
             }
 
             bodyParts = parts.ToArray();
@@ -55,10 +57,17 @@ namespace _Code.Robot_Parts {
 
         static void AddFromList(string[] namesToFind, Transform t, List<BodyPart> parts) {
             foreach (var nameToFind in namesToFind) {
-                if (t.name.ToLower().Contains(nameToFind.ToLower()) && !t.name.ToLower().Contains("end".ToLower()) && !t.name.ToLower().Contains("target".ToLower()) && t.GetComponent<BodyPart>() == null) {
+                if (t.name.ToLower().Contains(nameToFind.ToLower()) && !t.name.ToLower().Contains("end".ToLower()) && 
+                    !t.name.ToLower().Contains("target".ToLower())) {
                     Undo.RecordObject(t, "BodyPart");
-                    Debug.Log($"Adding part to {t.name}");
-                    parts.Add(t.gameObject.AddComponent<BodyPart>());
+                    var bp = t.GetComponent<BodyPart>();
+                    if (bp == null) {
+                        Debug.Log ($"Adding part to {t.name}");
+                        parts.Add (t.gameObject.AddComponent<BodyPart>());
+                    }
+                    else {
+                        parts.Add (bp);
+                    }
                 }
             }
         }

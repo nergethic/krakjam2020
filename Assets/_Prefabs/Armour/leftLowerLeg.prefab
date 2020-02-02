@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyType: 7
+  side: 3
   isAttached: 0
   player1: 0
 --- !u!135 &691126710083716089

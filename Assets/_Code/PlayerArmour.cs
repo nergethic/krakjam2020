@@ -172,7 +172,7 @@ public class PlayerArmour : MonoBehaviour {
             var armorPart = go.GetComponent<ArmourPart>();
             if (armorPart == null || armorPart.isAttached)
                 return;
-            var (exists, armorSocket) = robotBody.GetBodyPart(armorPart.bodyType);
+            var (exists, armorSocket) = robotBody.GetBodyPart(armorPart);
 
             if (exists) {
                 armorSocket.SetOccupied(true, armorPart);
