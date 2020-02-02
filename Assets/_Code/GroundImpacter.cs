@@ -17,6 +17,8 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
     [SerializeField] Transform player1;
     [SerializeField] Island island2;
     [SerializeField] Transform player2;
+    [SerializeField] GameObject[] fallParticles;
+    [SerializeField] ParticleSystem[] impactParticles;
 
     public bool Ready { get; set; }
     public StartMenu StartMenu { get; set; }
@@ -25,9 +27,18 @@ public class GroundImpacter : MonoBehaviour, IWaitForStart {
         Ready = true;
         while (!Ready)
             yield return null;
+        foreach (var fallParticle in fallParticles) {
+            fallParticle.SetActive (true);
+        }
         while (player1.position.y > groundPoint.position.y)
             yield return null;
         OnGroundHit?.Invoke();
+        foreach (var fallParticle in fallParticles) {
+            fallParticle.SetActive (false);
+        }
+        foreach (var impactParticle in impactParticles) {
+            impactParticle.Play();
+        }
         Execute();
         yield return new WaitForSeconds (dynamicCamera.startPointLookDuration);
         leftCamera.rect = new Rect(-0.5f, 0f, 1f, 1f);

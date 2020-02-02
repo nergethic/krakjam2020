@@ -9,6 +9,10 @@
       <e p="Assets" t="Include">
         <e p="_Code" t="Include">
           <e p="ArmourPart.cs" t="Include" />
+          <e p="Audio" t="Include">
+            <e p="AudioManager.cs" t="Include" />
+            <e p="Sound.cs" t="Include" />
+          </e>
           <e p="CameraShakeInstance.cs" t="Include" />
           <e p="CameraShakePresets.cs" t="Include" />
           <e p="CameraShaker.cs" t="Include" />
@@ -104,6 +108,35 @@
         <e p="KeyTip.cs" t="Include" />
         <e p="LowpolyVegetationPackFree" t="Include">
           <e p="Readme.txt" t="Include" />
+        </e>
+        <e p="ParticleShadersVol1" t="Include">
+          <e p="Editor" t="Include">
+            <e p="EMMaterialInspector.cs" t="Include" />
+          </e>
+          <e p="Readme.txt" t="Include" />
+          <e p="SampleSceneAssets" t="Include">
+            <e p="Materials" t="Include">
+              <e p="LightBulb.shader" t="Include" />
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="CameraRig.cs" t="Include" />
+              <e p="ColorPicker.cs" t="Include" />
+              <e p="EMUI.cs" t="Include" />
+              <e p="EMUI_Animations.cs" t="Include" />
+              <e p="ExamplesController.cs" t="Include" />
+              <e p="GetName.cs" t="Include" />
+              <e p="LightRig.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="EM_Particles_Lit.shader" t="Include" />
+            <e p="EM_Particles_Lit_Fallback.shader" t="Include" />
+            <e p="EM_Particles_Lit_MultiLight.shader" t="Include" />
+            <e p="EM_Particles_Unlit.shader" t="Include" />
+            <e p="EMParticleFunctions.cginc" t="Include" />
+            <e p="EMParticleLighting.cginc" t="Include" />
+            <e p="EMParticleVariables.cginc" t="Include" />
+          </e>
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
