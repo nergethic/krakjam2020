@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
          s.source = musicAudioSource;
          
          s.source.pitch = s.pitch;
-        
+         s.source.outputAudioMixerGroup = s.mixerGroup;
          s.source.volume = s.volume;
          s.source.clip = s.clip;
          s.source.PlayOneShot(s.source.clip);
