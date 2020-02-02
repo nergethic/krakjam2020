@@ -37493,5 +37493,10 @@ PrefabInstance:
       propertyPath: primaryPlayerRigidbody
       value: 
       objectReference: {fileID: 1687020454}
+    - target: {fileID: 3970189834321055911, guid: 1389412a663f61041888f8617d6c430c,
+        type: 3}
+      propertyPath: secondaryPlayerRigidbody
+      value: 
+      objectReference: {fileID: 926238597}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1389412a663f61041888f8617d6c430c, type: 3}
