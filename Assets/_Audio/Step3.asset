@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: step3
   clip: {fileID: 8300000, guid: 9afc8403c5638ce40ba793bac6c0dd5c, type: 3}
-  volume: 1
-  mixerGroup: {fileID: -8612680042361950272, guid: 8eff115c7df8df042ae6296b4eb227e7,
+  volume: 0.504
+  mixerGroup: {fileID: -8612680042361950272, guid: 274f903b2d5c5c740bfc015d9cc50594,
     type: 2}
-  pitch: 0.75385594
+  pitch: 0.71590024
   source: {fileID: 0}
