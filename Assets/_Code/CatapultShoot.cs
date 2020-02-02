@@ -116,8 +116,18 @@ public class CatapultShoot : MonoBehaviour
         var elapsedTime = 0f;
         while (elapsedTime < flyTime)
         {
-            rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
-                 enemyPositionInShootMoment, middlePointOnCurve);
+            if (elapsedTime < (flyTime * 9) / 10)
+            {
+                rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
+                    enemyPlayerTransform.position, middlePointOnCurve);
+                enemyPositionInShootMoment = enemyPlayerTransform.position;
+            }
+            else
+            {
+                rockClone.transform.position = GetBezierPoint(elapsedTime / flyTime, rockStartTransform.position,
+                    enemyPositionInShootMoment, middlePointOnCurve);
+            }
+            
             elapsedTime += Time.deltaTime;
         
             yield return null;

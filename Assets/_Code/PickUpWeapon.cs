@@ -9,6 +9,7 @@ public class PickUpWeapon : MonoBehaviour
 
     [SerializeField] private Transform weaponPlaceInPlayer;
     [SerializeField] private string weaponTag="Weapon";
+    [SerializeField] private PlayerController playerController;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,7 @@ public class PickUpWeapon : MonoBehaviour
          Weapon weaponScript=  other.GetComponent<Weapon>();
          if (!weaponScript.isAttached)
          {
+             playerController.AnimateEquippingGun();
              ParentWeaponToPlayer(weaponScript);
          }
         }
