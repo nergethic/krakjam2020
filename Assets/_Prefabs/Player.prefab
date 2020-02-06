@@ -19715,12 +19715,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3487aebfd06c74f818fdcb35f0f188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  padIndex: 0
+  padIndex: 1
   isShootButtonPressed: 0
   dynamicCamera: {fileID: 0}
+  rightStick: {x: 0, y: 0, z: 0}
   walkSpeed: 0.02
   runSpeed: 0.07
-  jumpForce: 650
+  jumpForce: 750
   rotationSpeed: 2
   animator: {fileID: 3382444431159161948}
   rb: {fileID: 653965478784689655}
@@ -19741,6 +19742,7 @@ MonoBehaviour:
   weaponPlaceInPlayer: {fileID: 3411084241729653648}
   weaponTag: Weapon
   playerController: {fileID: 9095246608783195981}
+  camera: {fileID: 0}
 --- !u!114 &7751327278679306308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19774,7 +19776,6 @@ MonoBehaviour:
   distanceWhenParent: 0.05
   flyTime: 4
   armorParts:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -29915,7 +29916,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -34013,13 +34014,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805887993329532375}
-  m_LocalRotation: {x: -0.5336603, y: -0.46390373, z: -0.5336603, w: 0.46390373}
-  m_LocalPosition: {x: 0.009, y: -0.195, z: 0}
+  m_LocalRotation: {x: -0.4021697, y: -0.31319916, z: -0.68563586, w: 0.51968193}
+  m_LocalPosition: {x: -0.007, y: -0.167, z: -0.153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 728205741308269921}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -98, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -122.061, y: -154.807, z: 60.215996}
 --- !u!114 &8558367624088499463
 MonoBehaviour:
   m_ObjectHideFlags: 0

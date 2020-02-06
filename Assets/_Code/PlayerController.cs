@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
     [SerializeField] int padIndex = 0;
     public bool isShootButtonPressed;
     public DynamicCamera dynamicCamera;
+    public Vector3 rightStick;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float jumpForce;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
     public int PadIndex => padIndex;
     public bool PadAssigned => padAssigned;
     public Gamepad Pad => pad;
+    bool sprintEnabled;
 
     void Awake() {
         transform = gameObject.transform;
@@ -56,82 +58,73 @@ public class PlayerController : MonoBehaviour, IWaitForStart {
         inputBlocked = false;
     }
 
-    void Update() {
+    void Update(){
         if (inputBlocked)
             return;
 
         bool shiftDown;
         bool forwardKeyPressed;
-        bool backwardKeyPressed;
-        bool leftKeyPressed;
-        bool rightKeyPressed;
         bool jumpPressed;
+        bool forwardPressed;
 
-        if (!padAssigned) {
-            shiftDown = Keyboard.current.leftShiftKey.isPressed;
-            forwardKeyPressed = Keyboard.current.wKey.isPressed;
-            backwardKeyPressed = Keyboard.current.sKey.isPressed;
-            leftKeyPressed = Keyboard.current.aKey.isPressed;
-            rightKeyPressed = Keyboard.current.dKey.isPressed;
-            jumpPressed = Keyboard.current.spaceKey.isPressed;
-        }
-        else {
-            isShootButtonPressed = pad.xButton.wasPressedThisFrame;
-            var leftStick = pad.leftStick.ReadValue();
-            shiftDown = leftStick.y > 0.8f;
-
-            forwardKeyPressed = leftStick.y > MIN_STICK_TILT;
-            backwardKeyPressed = leftStick.y < -MIN_STICK_TILT;
-            rightKeyPressed = pad.rightStick.ReadValue().x > MIN_STICK_TILT;
-            leftKeyPressed = pad.rightStick.ReadValue().x < -MIN_STICK_TILT;
-
-            jumpPressed = pad.aButton.isPressed;
+        if (!padAssigned){
+            return;
         }
 
-        if (forwardKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND, shiftDown ? 2 : 1);
-            if(shiftDown){
-                foreach (var runDustParticle in runDustParticles) {
+        isShootButtonPressed = pad.xButton.wasPressedThisFrame;
+        var leftStick = pad.leftStick.ReadValue();
+        rightStick = pad.rightStick.ReadValue();
+        if (pad.rightShoulder.wasPressedThisFrame)
+            dynamicCamera.ToggleCameraMode();
+        shiftDown = pad.leftTrigger.isPressed;
+        forwardPressed = pad.leftStick.EvaluateMagnitude() > 0.8f;
+
+        forwardKeyPressed = leftStick.y > MIN_STICK_TILT;
+
+        jumpPressed = pad.aButton.isPressed;
+
+        Vector3 stickDirection = new Vector3(leftStick.x, 0.0f, leftStick.y);
+        stickDirection = dynamicCamera.transform.rotation * stickDirection;
+        //stickDirection = transform.InverseTransformDirection(stickDirection);
+
+        if (forwardPressed){
+            animator.SetFloat(MOVEMENT_BLEND, shiftDown ? 2 : 1);
+            if (!sprintEnabled && shiftDown){
+                sprintEnabled = true;
+            }
+
+            if (sprintEnabled){
+                foreach (var runDustParticle in runDustParticles){
                     if (!runDustParticle.isPlaying)
                         runDustParticle.Play();
                 }
             }
 
-            if (!shiftDown) {
-                foreach (var runDustParticle in runDustParticles) {
+            if (!shiftDown){
+                foreach (var runDustParticle in runDustParticles){
                     runDustParticle.Stop();
                 }
             }
 
             transform.position += transform.forward * (shiftDown ? runSpeed : walkSpeed);
         }
-        else if (backwardKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND, -1);
-            transform.position -= transform.forward * walkSpeed / 2f;
-            foreach (var runDustParticle in runDustParticles) {
-                runDustParticle.Stop();
-            }
-        }
-        else {
-            animator.SetFloat (MOVEMENT_BLEND, 0);
-            foreach (var runDustParticle in runDustParticles) {
+        else{
+            sprintEnabled = false;
+            animator.SetFloat(MOVEMENT_BLEND, 0);
+            foreach (var runDustParticle in runDustParticles){
                 runDustParticle.Stop();
             }
         }
 
-        if (jumpPressed && Time.time > timeOfLastJump + JUMP_COOLDOWN) {
-            animator.SetTrigger (forwardKeyPressed ? JUMP_FORWARD_BOOL_NAME : JUMP_BLEND_NAME);
-            rb.AddForce (Vector3.Lerp (transform.forward, Vector3.up, 0.5f) * jumpForce, ForceMode.Impulse);
+        if (jumpPressed && Time.time > timeOfLastJump + JUMP_COOLDOWN){
+            animator.SetTrigger(forwardKeyPressed ? JUMP_FORWARD_BOOL_NAME : JUMP_BLEND_NAME);
+            rb.AddForce(Vector3.Lerp(transform.forward, Vector3.up, 0.5f) * jumpForce, ForceMode.Impulse);
             timeOfLastJump = Time.time;
         }
 
-        if (leftKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND, shiftDown && forwardKeyPressed ? 2 : 1);
-            transform.Rotate (0, -rotationSpeed, 0);
-        }
-        else if (rightKeyPressed) {
-            animator.SetFloat (MOVEMENT_BLEND, shiftDown && forwardKeyPressed ? 2 : 1);
-            transform.Rotate (0, rotationSpeed, 0);
+        if (forwardPressed){
+            var targetRotation = Quaternion.LookRotation(stickDirection, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 

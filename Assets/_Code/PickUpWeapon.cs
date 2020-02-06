@@ -16,7 +16,7 @@ public class PickUpWeapon : MonoBehaviour {
              rb.isKinematic = true;
              playerController.AnimateEquippingGun();
              weaponScript.SetAttached(true);
-             camera.ChangeCameraMode();
+             camera.ToggleCameraMode();
              ParentWeaponToPlayer(weaponScript);
          }
         }
